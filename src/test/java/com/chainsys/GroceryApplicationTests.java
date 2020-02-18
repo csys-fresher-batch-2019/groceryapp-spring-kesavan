@@ -1,4 +1,4 @@
-package com.chainsys.grocery;
+package com.chainsys;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
