@@ -1,6 +1,7 @@
 package com.chainsys.grocerymaven;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,16 +21,20 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	public int CreateAccount(String user, String pass, String address, long mobile, String mail) {
 		int id = 0;
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
-			String sql = "insert into usersdata(user_id,user_name,delivery_address,password,phone_no,mail_id) "
-					+ "values(se_name.nextval,?,?,?,?,?)";
+			String sql = "insert into usersdata(user_name,delivery_address,password,phone_no,mail_id) "
+					+ "values(?,?,?,?,?)";
 			Jdbcpst.preparestmt(sql, user, address, pass, mobile, mail);
 			String sql1 = "select user_id from usersdata where user_name='" + user + "'";
-			stmt.executeUpdate(sql1);
+
 			try (ResultSet rs = stmt.executeQuery(sql1);) {
-				rs.next();
-				id = rs.getInt("user_id");
+				if (rs.next()) {
+					id = rs.getInt("user_id");
+				} else {
+					System.out.println("User not exists");
+				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
 		}
 		return id;
@@ -101,13 +106,15 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		ArrayList<Ordersummary> productsview = new ArrayList<>();
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
 			LocalDate today = LocalDate.now();
-			Jdbcpst.preparestmt("update orderdata set order_status = 'DELIVERED' where to_date('" + today
-					+ "','yyyy-MM-dd') = delivery_date");
+			String sql4 = "update orderdata set order_status = 'DELIVERED' where delivery_date = ?";
+			Object[] params = { Date.valueOf(today) };
+			Jdbcpst.preparestmt(sql4, params);
 
 			String sql = "select order_id,product_name,manufacturer,no_of_items,price_per_item,total_amount,"
 					+ "order_date,delivery_date,delivery_address,order_status,payment,transaction_id  from orderdata o "
-					+ "inner join products p on p.product_id=o.product_id and user_id=" + userid + ""
-					+ "inner join usersdata u on u.user_id=" + userid + "";
+					+ " inner join products p on p.product_id=o.product_id and user_id=" + userid + ""
+					+ " inner join usersdata u on u.user_id=" + userid + "";
+			System.out.println(sql);
 			try (ResultSet rs = stmt.executeQuery(sql);) {
 				while (rs.next()) {
 					Ordersummary os = new Ordersummary();
@@ -127,6 +134,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 			}
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
 		}
 		return productsview;
@@ -164,7 +172,6 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		String s = "";
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
 			String sql = "select order_date from orderdata where order_id=" + orderid;
-			stmt.executeUpdate(sql);
 			try (ResultSet rs = stmt.executeQuery(sql);) {
 				rs.next();
 				String date = rs.getString("order_date");
@@ -356,22 +363,18 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	// CHECK MAIL FOR ACC CREATION
 	public boolean checkmailcreate(String mail) {
-		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
-			if (stmt.executeUpdate("select mail_id from usersdata where mail_id='" + mail + "'") == 0) {
-				return true;
-			}
-		} catch (Exception e) {
-			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
-
-		}
-		return false;
+		String sql = "select mail_id from usersdata where mail_id='" + mail + "'";
+		return Jdbcpst.exists(sql);
 	}
 
 	// CHECK USERNAME FOR ACC CREATION
 	public boolean checkusernamecreate(String username) {
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
-			if (stmt.executeUpdate("select user_name from usersdata where user_name='" + username + "'") == 0) {
-				return true;
+			String sql = "select user_name from usersdata where user_name='" + username + "'";
+			try (ResultSet rs = stmt.executeQuery(sql)) {
+				if (rs.next()) {
+					return true;
+				}
 			}
 		} catch (Exception e) {
 			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
@@ -383,8 +386,12 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	// CHECK MOBILE NO FOR ACC CREATION
 	public boolean checkmobilenocreate(long mobile) {
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
-			if (stmt.executeUpdate("select phone_no from usersdata where phone_no='" + mobile + "'") == 0) {
-				return true;
+			String sql = "select phone_no from usersdata where phone_no='" + mobile + "'";
+			try (ResultSet rs = stmt.executeQuery(sql)) {
+				if (rs.next()) {
+					return true;
+				}
+
 			}
 		} catch (Exception e) {
 			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);

@@ -1,7 +1,8 @@
 package com.chainsys.payment;
+/*
+import com.chainsys.util.DBException;
 
 import citiipay.implementation.TransactiondaoImpl;
-import citiipay.messages.DBException;
 import citiipay.models.Merchant;
 
 public class WalletAPI {
@@ -12,4 +13,4 @@ public class WalletAPI {
 		obj=obj1.payToMerchant(merchantId, mobileNo, amount);
 		return obj;
 	}
-}
+}*/

@@ -5,12 +5,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocerymaven.UserProfileDao;
 import com.chainsys.grocerymaven.UserProfileDaoImpl;
+@WebServlet("/register")
 
 public class register extends HttpServlet {
 
@@ -30,7 +32,8 @@ public class register extends HttpServlet {
 		boolean mobile=obj.checkmobilenocreate(c);
 		boolean mail=obj.checkmailcreate(b);
 		boolean user=obj.checkusernamecreate(a);
-		if(user && mail && user) {
+		//if(user && mail && user) {
+		if(true) {
 		try {
 
 			id = obj.CreateAccount(a, d, address, c, b);

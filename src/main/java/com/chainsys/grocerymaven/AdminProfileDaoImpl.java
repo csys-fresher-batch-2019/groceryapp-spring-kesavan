@@ -1,7 +1,7 @@
 package com.chainsys.grocerymaven;
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -86,12 +86,13 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 							}
 							int totalBill = price * obj1.getNoOfItems();
 							String payment = type;
-							stmt.executeUpdate(
-									"insert into orderdata(user_id,product_id,order_date,delivery_date,no_of_items,price_per_item,order_status,total_amount,payment,transaction_id) values( "
-											+ userId +"," + productId + ", to_date('" + today
-											+ "','yyyy-MM-dd') , to_date( '" + deliveryDate + "','yyyy-MM-dd'),"
-											+ obj1.getNoOfItems() + "," + price + ", 'ORDERED', " + totalBill + " ,'"
-											+ payment + "'," + id + ")");
+							String sql3 = "insert into orderdata(user_id,product_id,order_date,delivery_date,no_of_items,price_per_item,order_status,total_amount,payment,transaction_id) values(?,?,?,?,?,?,'ORDERED',?,?,?)";
+							/*+ productId + ", to_date('" + today
+									+ "','yyyy-MM-dd') , to_date( '" + deliveryDate + "','yyyy-MM-dd'),"
+									+ obj1.getNoOfItems() + "," + price + ", 'ORDERED', " + totalBill + " ,'"
+									+ payment + "'," + id + ")";
+							*/Object[] params = { userId, productId, Date.valueOf(today), Date.valueOf(deliveryDate), obj1.getNoOfItems(), price, totalBill, payment, id };
+						Jdbcpst.preparestmt(sql3, params);
 							// stmt.executeUpdate(query);
 							Jdbcpst.preparestmt("update products p set p.stock=p.stock- ?  where product_id =?",
 									obj1.getNoOfItems(), productId);
