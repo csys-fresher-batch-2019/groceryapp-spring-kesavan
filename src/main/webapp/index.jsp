@@ -2,6 +2,7 @@
 <head>
 <title>Login</title>
 </head>
+
 <center>
 	<h1>E-GROCERY LOGIN</h1>
 	<body style="background-color: powderblue">
@@ -11,6 +12,11 @@
 				New User ?<br>
 				<a href="Register.jsp">Register Here</a>
 			</h4>
+		</div>
+		<div align="left">
+<h3>
+			<a href="adminindex.jsp">AdminLogin</a>
+		</h3>
 		</div>
 		<br>
 		<form action="login" method=post>

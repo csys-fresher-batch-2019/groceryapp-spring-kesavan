@@ -114,7 +114,6 @@ public class UserProfileDaoImpl implements UserProfileDao {
 					+ "order_date,delivery_date,delivery_address,order_status,payment,transaction_id  from orderdata o "
 					+ " inner join products p on p.product_id=o.product_id and user_id=" + userid + ""
 					+ " inner join usersdata u on u.user_id=" + userid + "";
-			System.out.println(sql);
 			try (ResultSet rs = stmt.executeQuery(sql);) {
 				while (rs.next()) {
 					Ordersummary os = new Ordersummary();

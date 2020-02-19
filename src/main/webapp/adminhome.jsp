@@ -4,18 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<br><br><div align="right">
+			<button>
+				<a href="index.jsp">Logout</a>
+		</div>
+		</button>
 <center>
 	<body style="background-color: powderblue">
 		<h2>E-GROCERY ADMIN PORTAL</h2>
 <center><br><br>
-		<a href="Addproducts.jsp">Add Products</a>
+	<h2>	<a href="Addproducts.jsp">Add Products</a></h2>
 	</center>
 	<br />
 	<br />
 	<center>
-		<a href="viewproducts.jsp">View products</a>
+		<h2><a href="adminproviewservlet">View products</a></h2>
 	</center>
-	<br />
 	
+
+	<br />
 </body>
 </html>

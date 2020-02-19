@@ -1,6 +1,8 @@
 package com.chainsys;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,10 +27,18 @@ public class addpro extends HttpServlet {
 		ob.setUnit(request.getParameter("units"));
 		ob.setPriceRS(Integer.parseInt(request.getParameter("price").toString()));
 		ob.setStock(Integer.parseInt(request.getParameter("stock").toString()));
-		AdminProfile[] p = {ob };
+		AdminProfile[] p = {ob};
 		AdminProfileDao obj=new AdminProfileDaoImpl();
-		obj.addProducts(p);
-		
+		int a=obj.addProducts(p);
+		if(a==1) {
+		String r="true";
+		RequestDispatcher d = request.getRequestDispatcher("Addproducts.jsp?result="+r);
+		d.forward(request, response);
+		}else {
+			String r="fail";
+			RequestDispatcher d = request.getRequestDispatcher("Addproducts.jsp?result="+r);
+			d.forward(request, response);
+		}
 	}
 
 }

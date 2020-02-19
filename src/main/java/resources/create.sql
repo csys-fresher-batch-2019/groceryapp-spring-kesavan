@@ -1,56 +1,64 @@
+
 create table products(
- product_name varchar2(30) not null,
- product_id number primary key,
- manufacturer varchar2(30),
+ product_name varchar(30) not null,
+ product_id int primary key,
+ manufacturer varchar(30),
  quantity float,
- unit varchar2(25),
- price_Rs number not null,
+ unit varchar(25),
+ price_Rs int not null,
  stock int,
- status varchar2(25)
+ status varchar(25)
  );
  
  create table usersdata(
-user_id number primary key,
-user_name varchar2(25) unique,
-password varchar2(15) not null,
-mail_id varchar2(30) unique,
-phone_no number(10) unique ,
-delivery_address varchar2(60)
+user_id int primary key auto_increment,
+user_name varchar(25) unique,
+password varchar(15) not null,
+mail_id varchar(30) unique,
+phone_no bigint(10) unique ,
+delivery_address varchar(60)
 );
-create sequence se_name start with 1100 increment by 1;
 
 create table orderdata(
-user_id number not null,
-order_id number,
-product_id number not null,
-no_of_items  number not null,
-price_per_item number,
-total_amount number,
+user_id int not null,
+order_id int primary key auto_increment,
+product_id int not null,
+no_of_items  int not null,
+price_per_item int,
+total_amount int,
 order_date date  not null,
 delivery_date date,
-order_status varchar2(30) default 'NOT ORDERED',
-payment varchar2(30) default 'COD',
-transaction_id number,
+order_status varchar(30) default 'NOT ORDERED',
+payment varchar(30) default 'COD',
+transaction_id int,
 constraint product_id_fk foreign key(product_id) references products(product_id),
 constraint user_id_fk foreign key(user_id) references usersdata(user_id)
 );
-create sequence seq_name start with 1000 increment by 2;
 
 create table proreview(
-product_id number,
+product_id int,
 rating float default 0,
-review varchar2(10)
+review varchar(10)
 );
 
 create table review(
-order_id number unique,
-product_id number not null,
+order_id int unique,
+product_id int not null,
 rating float not null,
 constraint product_fk foreign key(product_id) references products(product_id)
 );
 
+drop table usersdata;
+drop table orderdata;
+drop table usersdata;
+ 
 
+select * from orderdata;
+select * from usersdata;
+select * from products;
+select * from proreview;
+select * from review;
 
-
-
-
+ insert into proreview(product_id,rating,review)
+values(1432,4,'Good');
+delete from products where product_id=12

@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import org.springframework.util.SystemPropertyUtils;
+
 import com.chainsys.util.Errormessage;
 import com.chainsys.util.Jdbcpst;
 import com.chainsys.util.LoggerGrocery;
@@ -15,7 +18,8 @@ import com.chainsys.util.Databaseconnection;
 public class AdminProfileDaoImpl implements AdminProfileDao {
 	LoggerGrocery LOGGER = LoggerGrocery.getInstance();
 
-	public void addProducts(AdminProfile[] p) {
+	public int addProducts(AdminProfile[] p) {
+		int a = 0;
 		for (AdminProfile obj : p) {
 			try {
 				Jdbcpst.preparestmt(
@@ -23,7 +27,10 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 								+ obj.getProductName() + "'," + obj.getProductId() + ",'" + obj.getManufacturer() + "',"
 								+ obj.getQuantity() + ",'" + obj.getUnit() + "'," + obj.getPriceRS() + ","
 								+ obj.getStock() + ")");
+				a = 1;
+
 			} catch (Exception e) {
+				a = 0;
 				LOGGER.debug(Errormessage.INVALID_COLUMN_INDEX);
 			}
 			try {
@@ -45,20 +52,7 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 				LOGGER.debug(Errormessage.INVALID_COLUMN_INDEX);
 			}
 		}
-	}
-
-	public void userDetails(AdminProfile[] u) {
-
-		for (AdminProfile obj : u) {
-			try {
-				Jdbcpst.preparestmt(
-						"insert into usersdata(password,phone_no,user_name,delivery_address,mail_id)  values(  "
-								 + obj.getPassword() + "'," + obj.getPhoneno() + ",'"
-								+ obj.getUsername() + "','" + obj.getDeliveryaddress() + "','" + obj.getMail() + "')");
-			} catch (Exception e) {
-				LOGGER.debug(Errormessage.INVALID_COLUMN_INDEX);
-			}
-		}
+		return a;
 	}
 
 	public void createOrder(ArrayList<UserProfile> ob, String user, String type, int id) {
@@ -87,12 +81,10 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 							int totalBill = price * obj1.getNoOfItems();
 							String payment = type;
 							String sql3 = "insert into orderdata(user_id,product_id,order_date,delivery_date,no_of_items,price_per_item,order_status,total_amount,payment,transaction_id) values(?,?,?,?,?,?,'ORDERED',?,?,?)";
-							/*+ productId + ", to_date('" + today
-									+ "','yyyy-MM-dd') , to_date( '" + deliveryDate + "','yyyy-MM-dd'),"
-									+ obj1.getNoOfItems() + "," + price + ", 'ORDERED', " + totalBill + " ,'"
-									+ payment + "'," + id + ")";
-							*/Object[] params = { userId, productId, Date.valueOf(today), Date.valueOf(deliveryDate), obj1.getNoOfItems(), price, totalBill, payment, id };
-						Jdbcpst.preparestmt(sql3, params);
+
+							Object[] params = { userId, productId, Date.valueOf(today), Date.valueOf(deliveryDate),
+									obj1.getNoOfItems(), price, totalBill, payment, id };
+							Jdbcpst.preparestmt(sql3, params);
 							// stmt.executeUpdate(query);
 							Jdbcpst.preparestmt("update products p set p.stock=p.stock- ?  where product_id =?",
 									obj1.getNoOfItems(), productId);

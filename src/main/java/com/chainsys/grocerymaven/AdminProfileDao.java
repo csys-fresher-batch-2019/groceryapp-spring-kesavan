@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 public interface AdminProfileDao {
 	
-	void addProducts(AdminProfile[] p);
+	int addProducts(AdminProfile[] p);
 	
-	void userDetails(AdminProfile[] u);
 	
 	void createOrder(ArrayList<UserProfile> o, String user, String pay, int id);
 

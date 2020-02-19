@@ -30,7 +30,6 @@
 		<%=username.toUpperCase()%>
 </center>
 
-</br>
 </div>
 <form action="sort">
 	<form>
@@ -60,15 +59,17 @@
 	<form action="search">
 
 
-		Search Products : <input type="text" name="field" pattern="[a-z]" title="Type only characters"
-			placeholder="Enter Product Name " required />
+		Search Products : <input type="text" name="field" pattern="[a-z]"
+			title="Type only characters" placeholder="Enter Product Name "
+			required />
 		<button type="submit">Search</button>
 	</form>
 	<br> <br>
 	<%
 		ArrayList<UserDisplay> list = (ArrayList) request.getAttribute("listpro");
 		if (list.size() > 0) {
-	%>
+	%>			<center>
+	
 	<form action="cart">
 		<table border="1">
 			<thead>
@@ -137,7 +138,6 @@
 							<option value="6">6</option>
 					</select></td>
 				</tr>
-
 				<%
 					}
 						}

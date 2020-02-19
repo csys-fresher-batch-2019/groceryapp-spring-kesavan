@@ -15,24 +15,23 @@ public class Jdbcpst {
 				pst.setObject(i, obj);
 				i++;
 			}
-			int rows  = pst.executeUpdate();
-			System.out.println("Rows:" + rows);
+			pst.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.debug(e);
 		}
 
 	}
-	
-	public static boolean exists(String sql, Object... params)  {
+
+	public static boolean exists(String sql, Object... params) {
 		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
-boolean exists = false;
+		boolean exists = false;
 		try (Connection con = Databaseconnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			int i = 1;
 			for (Object obj : params) {
 				pst.setObject(i, obj);
 				i++;
 			}
-			try(ResultSet rs = pst.executeQuery()){
+			try (ResultSet rs = pst.executeQuery()) {
 				if (rs.next()) {
 					exists = true;
 				}
