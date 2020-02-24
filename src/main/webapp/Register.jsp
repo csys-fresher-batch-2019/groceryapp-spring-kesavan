@@ -33,7 +33,7 @@
 					<td><label for="phone">Enter Mobile number:</label></td>
 					<td><input type="tel" id="phone" name="Mobileno"
 						title="Please enter 10 digit mobile number"
-						pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder=" Enter Mobile_num"
+						pattern="[6-9]{1}[0-9]{9}" placeholder=" Enter Mobile_num"
 						required /></td>
 				</tr>
 
@@ -59,24 +59,22 @@
 				</tr>
 		</table>
 		<pre>
-
 </pre>
 		<button type="submit">Submit</button>
-	</center>
 
-	</form>
-	<%
-		String res = (String) request.getParameter("status");
-	%>
-	<%
-		if (res != null) {
-	%>
-	<script>
-		alert("Account Details Already Exists\n Please try another Username / Email / MobileNumber");
-	</script>
-	<%
-		}
-	%>
-
+		</form>
+		<%
+			String res = (String) request.getParameter("status");
+		%>
+		<%
+			if (res != null) {
+		%>
+		<script>
+			alert("Account Details Already Exists\n Please try another Username / Email / MobileNumber");
+		</script>
+		<%
+			}
+		%>
+	
 </body>
 </html>

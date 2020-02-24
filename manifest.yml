@@ -1,0 +1,8 @@
+---
+applications:
+- name: api.GroceryApplication.in
+  buildpack: java_buildpack
+  memory: 1G
+  instances: 1
+  path: target/grocery-0.0.1-SNAPSHOT.war
+  

@@ -64,110 +64,110 @@
 			required />
 		<button type="submit">Search</button>
 	</form>
-	<br> <br>
+	<br>
+	<%
+		String result = (String) request.getParameter("res");
+		if (result != null) {
+			out.println("<center><font color=green><br>" + result + "</font></center>");
+		}
+	%>
+
 	<%
 		ArrayList<UserDisplay> list = (ArrayList) request.getAttribute("listpro");
 		if (list.size() > 0) {
-	%>			<center>
-	
-	<form action="cart">
-		<table border="1">
-			<thead>
-				<tr>
-					<th>S.no</th>
-					<th>ProductName</th>
-					<th>ProductId</th>
-					<th>Manufacturer</th>
-					<th>Quantity</th>
-					<th>Unit</th>
-					<th>Price(RS)</th>
-					<th>Stock</th>
-					<th>Status</th>
-					<th>Rating</th>
-					<th>Review</th>
-					<th>Click to Order</th>
-					<th>No_of_Items</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					int i = 1;
-						for (UserDisplay ud : list) {
-				%>
-				<tr>
+	%>
+	<center>
+		<br>
 
-					<td><%=i++%></td>
-					<td><%=ud.getProductName()%></td>
-					<td><%=ud.getProductId()%></td>
-					<td><%=ud.getManufacturer()%></td>
-					<td><%=ud.getQuantity()%></td>
-					<td><%=ud.getUnit()%></td>
-					<td><%=ud.getPriceRS()%></td>
-					<td><%=ud.getStock()%></td>
-					<td><%=ud.getStatus()%></td>
-					<td><%=ud.getRating()%></td>
-					<td><%=ud.getReview()%></td>
-					<td><input type="checkbox" name="pid"
-						id="pid_<%=ud.getProductId()%>"
-						onchange="disable(<%=ud.getProductId()%>)"
-						value="<%=ud.getProductId()%>"></td>
+		<form action="cart">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>S.no</th>
+						<th>ProductName</th>
+						<th>ProductId</th>
+						<th>Manufacturer</th>
+						<th>Quantity</th>
+						<th>Unit</th>
+						<th>Price(RS)</th>
+						<th>Stock</th>
+						<th>Status</th>
+						<th>Rating</th>
+						<th>Review</th>
+						<th>Click to Order</th>
+						<th>No_of_Items</th>
+					</tr>
+				</thead>
+				<tbody>
 					<%
-						if ((int) ud.getStock() == 0) {
+						int i = 1;
+							for (UserDisplay ud : list) {
 					%>
-					<td><select name="qty_<%=ud.getProductId()%>"
-						onchange="disable(<%=ud.getProductId()%>)" disabled>
-							<option value="0"></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-					</select></td>
+					<tr>
+
+						<td><%=i++%></td>
+						<td><%=ud.getProductName()%></td>
+						<td><%=ud.getProductId()%></td>
+						<td><%=ud.getManufacturer()%></td>
+						<td><%=ud.getQuantity()%></td>
+						<td><%=ud.getUnit()%></td>
+						<td><%=ud.getPriceRS()%></td>
+						<td><%=ud.getStock()%></td>
+						<td><%=ud.getStatus()%></td>
+						<td><%=ud.getRating()%></td>
+						<td><%=ud.getReview()%></td>
+						<td><input type="checkbox" name="pid"
+							id="pid_<%=ud.getProductId()%>"
+							onchange="disable(<%=ud.getProductId()%>)"
+							value="<%=ud.getProductId()%>"></td>
+						<%
+							if ((int) ud.getStock() == 0) {
+						%>
+						<td><select name="qty_<%=ud.getProductId()%>"
+							onchange="disable(<%=ud.getProductId()%>)" disabled>
+								<option value="0"></option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+						</select></td>
+						<%
+							} else {
+						%>
+						<td><select name="qty_<%=ud.getProductId()%>"
+							onchange="disable(<%=ud.getProductId()%>)" autofocus>
+								<option value="0"></option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+						</select></td>
+					</tr>
 					<%
+						}
+							}
 						} else {
 					%>
-					<td><select name="qty_<%=ud.getProductId()%>"
-						onchange="disable(<%=ud.getProductId()%>)" autofocus>
-							<option value="0"></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-					</select></td>
-				</tr>
-				<%
-					}
+					<h3>No results found</h3>
+					<%
 						}
-					} else {
-				%>
-				<h3>No results found</h3>
-				<%
-					}
-				%>
-			</tbody>
-		</table>
-		<br> <br>
+					%>
+				</tbody>
+			</table>
+			<br> <br>
 
-		<button type="submit">Add to Cart</button>
+			<button type="submit">Add to Cart</button>
 
-	</form>
-	<br>
-	<button>
-		<a href="home.jsp">Home</a>
-	</button>
-	<script>
-	$(document).ready(function(){
-	    $("form").submit(function(){
-	 if ($('input:checkbox').filter(':checked').length < 1){
-	        alert("Check at least one Game!");
-	 return false;
-	 }
-	    });
-	});</script>
-	<script>
+		</form>
+		<br>
+		<button>
+			<a href="home.jsp">Home</a>
+		</button>
+		<script>
 						function disable(productId) {
 								 
 								var i=0;
@@ -180,5 +180,6 @@
 								}
 							}
 	</script>
-	</body>
+
+		</body>
 </html>

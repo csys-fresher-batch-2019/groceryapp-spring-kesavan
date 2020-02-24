@@ -47,7 +47,7 @@
 			
 				Select Payment Type :
 				<input type="radio" name="Paytype" value="COD" checked required>Cash on Delivery 
-		<input type="radio" name="Paytype" value="CitiWallet" >Wallet
+		<input type="radio" name="Paytype" value="CitiWallet" disabled>Wallet
 				
 				<input type="radio" name="Paytype" value="Card" disabled>Card
 				

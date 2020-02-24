@@ -3,7 +3,7 @@
 <title>Login</title>
 <style>
 	body{
-		background-color:#28B7B3;
+		background-color:#85C1E9;
 		background-repeat:no-repeat;
 		background-image:url("c.gif");
 		}
@@ -11,8 +11,8 @@
 		{
 			width:100%;
 			height:50px;
-			background-color:#2D5573;
-			color:#D3E2D9;
+			background-color:#273746;
+			color:#FDFEFE;
 			margin-top:0px;
 		}
 		*{
@@ -94,18 +94,19 @@
 
 			</table>
 			<a href="forgot.jsp">Forgot Password</a>
+			<%
+			String result = (String) request.getParameter("res");
+			if (result != null) {
+				out.println("<center><font color=red><br>" + result + "</font></center>");
+			}
+		%>
 		</form>
 			
 		<br>
 		<br>
 
 
-		<%
-			String result = (String) request.getParameter("res");
-			if (result != null) {
-				out.println("<center><font color=red><br>" + result + "</font></center>");
-			}
-		%>
+		
 		<%
 			String res = (String) request.getParameter("result");
 		%>

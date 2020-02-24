@@ -15,10 +15,7 @@ public class AdminService {
 		obj.addProducts(p);
 	}
 
-	public void userDetails(AdminProfile[] u) {
-		obj.userDetails(u);
-	}
-
+	
 	public void createOrder(ArrayList<UserProfile> ob, String user, String type, int id) {
 		obj.createOrder(ob, user, type, id);
 	}

@@ -45,7 +45,8 @@ public class cart extends HttpServlet {
 			}
 			// System.out.println("No of items in existing cart:" + cartItems.size());
 			session.setAttribute("CARTS", cartItemsInSession);
-			RequestDispatcher d = request.getRequestDispatcher("productlist");
+			String res="Items added to cart Please check the cart for checkout !!! ";
+			RequestDispatcher d = request.getRequestDispatcher("productlist?res="+res);
 			d.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,4 +79,3 @@ public class cart extends HttpServlet {
 		return items;
 	}
 }
-

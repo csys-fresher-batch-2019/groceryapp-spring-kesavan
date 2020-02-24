@@ -70,13 +70,8 @@
 				<td><%=ud.getNoofitems()%></td>
 				<td><%=ud.getTotalamount()%></td>
 				<td><%=ud.getOrderdate()%></td>
-				<%
-					if (ud.getOrderstatus().equals("ORDERED")) {
-				%>
 				<td><%=ud.getDeliverydate()%></td>
-				<%}else { %>
-				<td>----------------</td>
-				<%} %>
+				
 				<td><%=ud.getDeliveryaddress()%></td>
 				<td><%=ud.getOrderstatus()%></td>
 				<td><%=ud.getPayment()%></td>
