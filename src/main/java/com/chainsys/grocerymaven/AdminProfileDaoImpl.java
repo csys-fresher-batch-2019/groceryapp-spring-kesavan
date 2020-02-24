@@ -160,4 +160,34 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 		}
 		return amount;
 	}
+
+	public int revenue(String a) {
+
+		int total = 0;
+		if (a.isEmpty()) {
+			try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
+				String sql = "select sum(total_amount) as total from orderdata";
+				try (ResultSet rs1 = stmt.executeQuery(sql);) {
+					if (rs1.next()) {
+						total = rs1.getInt("total");
+					}
+				}
+			} catch (Exception e) {
+				LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
+			}
+		} else {
+			try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
+				String sql = "select sum(total_amount) as total from orderdata where payment='" + a + "'";
+				try (ResultSet rs1 = stmt.executeQuery(sql);) {
+					if (rs1.next()) {
+						total = rs1.getInt("total");
+					}
+				}
+			} catch (Exception e) {
+				LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
+			}
+		}
+		return total;
+
+	}
 }

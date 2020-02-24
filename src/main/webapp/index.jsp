@@ -1,11 +1,64 @@
 <html>
 <head>
 <title>Login</title>
+<style>
+	body{
+		background-color:#28B7B3;
+		background-repeat:no-repeat;
+		background-image:url("c.gif");
+		}
+		.nav
+		{
+			width:100%;
+			height:50px;
+			background-color:#2D5573;
+			color:#D3E2D9;
+			margin-top:0px;
+		}
+		*{
+			box-sizing:border-box;
+		}
+		button{
+			background-color:#52B0F7;
+			color:#010314;
+			width:100px;
+			height:50px;
+			border-radius:10px;	
+			display:inline-end;	
+		}
+		form
+		{
+			width:40%;
+			float:right;
+			margin-right:90px;
+			display:block;
+			background-color:#95999B;
+			border-radius:15px;
+			opacity:0.9;
+			font-size:30px;	
+		}
+		input[type=text],input[type=password]{
+			width:60%;
+			border:2px solid #ccc;
+			border-radius:7px;
+			height:30px;
+			padding:12px;
+			}
+			label
+			{
+				width:60%;
+				padding:12px,12px,12px,0;
+				display:inline-block;
+				margin-top:10px;
+			}
+		
+</style>
 </head>
 
 <center>
-	<h1>E-GROCERY LOGIN</h1>
-	<body style="background-color: powderblue">
+	<div class="nav">
+	<h1>E-GROCERY LOGIN</h1></div>
+	<body >
 		<div align="right">
 
 			<h4>
@@ -19,9 +72,11 @@
 		</h3>
 		</div>
 		<br>
+		<div class = "y">
+		</div>
 		<form action="login" method=post>
 			<table>
-				<tr>Enter UserName :
+				<tr><label>Enter UserName :</label>
 				</tr>
 				<tr>
 					<input type="text" name="Username" placeholder="Enter Username"
@@ -29,7 +84,7 @@
 				</tr>
 				<tr>
 					<pre></pre>
-					Enter Password :
+					<label>Enter Password : </label>
 					<input type="password" name="password" placeholder="Enter Password"
 						required />
 				</tr>
@@ -38,10 +93,9 @@
 				<button type="submit">Submit</button>
 
 			</table>
-		</form>
-		<button>
 			<a href="forgot.jsp">Forgot Password</a>
-		</button>
+		</form>
+			
 		<br>
 		<br>
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocerymaven.UserProfileDao;
 import com.chainsys.grocerymaven.UserProfileDaoImpl;
+
 @WebServlet("/register")
 
 public class register extends HttpServlet {
@@ -25,28 +26,30 @@ public class register extends HttpServlet {
 		long c = Long.parseLong(request.getParameter("Mobileno"));
 		String d = request.getParameter("pw");
 		String e = request.getParameter("address");
-		String f=request.getParameter("pincode");
-		String address=e+"-"+f;
+		String f = request.getParameter("pincode");
+		String address = e + "-" + f;
 		UserProfileDao obj = new UserProfileDaoImpl();
 		int id = 0;
-		boolean mobile=obj.checkmobilenocreate(c);
-		boolean mail=obj.checkmailcreate(b);
-		boolean user=obj.checkusernamecreate(a);
-		//if(user && mail && user) {
-		if(true) {
-		try {
-
-			id = obj.CreateAccount(a, d, address, c, b);
-			RequestDispatcher h = request.getRequestDispatcher("index.jsp");
+		boolean mobile = obj.checkmobilenocreate(c);
+		boolean mail = obj.checkmailcreate(b);
+		boolean user = obj.checkusernamecreate(a);
+		System.out.println("mobile"+mobile);
+		System.out.println("mail"+mail);System.out.println("user"+user);
+		if (user || mail || user) {
+			String r = "fail";
+			RequestDispatcher h = request.getRequestDispatcher("Register.jsp?status=" + r);
 			h.forward(request, response);
 
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}}else {
-			String r="fail";
-			RequestDispatcher h = request.getRequestDispatcher("Register.jsp?status="+r);
-			h.forward(request, response);
+		} else {
+			try {
 
+				id = obj.CreateAccount(a, d, address, c, b);
+				RequestDispatcher h = request.getRequestDispatcher("index.jsp");
+				h.forward(request, response);
+
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 
 	}

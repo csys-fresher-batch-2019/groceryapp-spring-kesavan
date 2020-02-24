@@ -1,0 +1,21 @@
+2020-02-21 13:36:55.354  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Starting GroceryApplication on CSLH2017 with PID 9320 (C:\Users\kesa2381\Downloads\grocery\grocery\target\classes started by kesa2381 in C:\Users\kesa2381\Downloads\grocery\grocery)
+2020-02-21 13:36:55.377 DEBUG 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
+2020-02-21 13:36:55.377  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : No active profile set, falling back to default profiles: default
+2020-02-21 13:36:57.001  INFO 9320 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-21 13:36:57.002  INFO 9320 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-21 13:36:57.213  INFO 9320 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-02-21 13:36:57.217  INFO 9320 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-21 13:36:57.217  INFO 9320 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1770 ms
+2020-02-21 13:36:57.888  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Started GroceryApplication in 2.912 seconds (JVM running for 3.449)
+2020-02-21 13:37:03.083  INFO 9320 --- [http-nio-8091-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-21 13:37:03.083  INFO 9320 --- [http-nio-8091-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-21 13:37:03.195  INFO 9320 --- [http-nio-8091-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 112 ms
+2020-02-21 13:40:49.183  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Starting GroceryApplication on CSLH2017 with PID 9320 (C:\Users\kesa2381\Downloads\grocery\grocery\target\classes started by kesa2381 in C:\Users\kesa2381\Downloads\grocery\grocery)
+2020-02-21 13:40:49.183 DEBUG 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Running with Spring Boot v2.2.4.RELEASE, Spring v5.2.3.RELEASE
+2020-02-21 13:40:49.184  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : No active profile set, falling back to default profiles: default
+2020-02-21 13:40:49.608  INFO 9320 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-21 13:40:49.608  INFO 9320 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-21 13:40:49.803  INFO 9320 --- [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2020-02-21 13:40:49.804  INFO 9320 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-21 13:40:49.804  INFO 9320 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 618 ms
+2020-02-21 13:40:50.034  INFO 9320 --- [restartedMain] com.chainsys.GroceryApplication          : Started GroceryApplication in 0.88 seconds (JVM running for 235.594)

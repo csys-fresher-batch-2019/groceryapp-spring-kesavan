@@ -1,8 +1,8 @@
-package com.chainsys.payment;
-/*
-import com.chainsys.util.DBException;
+
+/*package com.chainsys.payment;
 
 import citiipay.implementation.TransactiondaoImpl;
+import citiipay.messages.DBException;
 import citiipay.models.Merchant;
 
 public class WalletAPI {

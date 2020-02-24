@@ -18,8 +18,8 @@
 				<tr>
 					<td>Enter User Name :</td>
 					<td><input type="text" name="Username"
-						pattern="[A-Z]{1}[a-z]{3,}"
-						title="First Letter Must be Capital then followed by small and specify a number at last"
+						pattern="[A-Z]{1}[a-z]{2,}"
+						title="First Letter Must be Capital then followed by small"
 						placeholder="Enter Username " required autofocus /></td>
 				</tr>
 				<pre></pre>

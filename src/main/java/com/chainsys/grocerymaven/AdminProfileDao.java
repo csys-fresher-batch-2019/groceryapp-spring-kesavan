@@ -16,4 +16,6 @@ public interface AdminProfileDao {
 	
 	//@SqlQuery("select price_rs from products where product_id= ?")
 	int bill(ArrayList<UserProfile> ob);
+	
+	int revenue(String a);
 }

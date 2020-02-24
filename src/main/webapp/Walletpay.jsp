@@ -19,14 +19,13 @@
 %>
 </br> LOGIN AS
 <%=username.toUpperCase()%>
-
+<center>
 <form action="paywallet" >
 		<br /> Citipay Wallet MobileNumber : <input type="number"
 		name="mobileno" required /> <br /> 
 		Enter your Pin :<input type="number"
 		name="pin" required /> <br /> 
 		
-	<!-- <input type = "button" value = "Redirect Me" onclick = "Redirect();" /> -->
 	<button type="submit">Submit</button>
 </form>
 </center>

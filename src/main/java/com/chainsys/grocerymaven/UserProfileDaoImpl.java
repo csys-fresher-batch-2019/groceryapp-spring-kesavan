@@ -152,7 +152,8 @@ public class UserProfileDaoImpl implements UserProfileDao {
 					Jdbcpst.preparestmt(
 							"update products p set p.stock=p.stock+ (select no_of_items from orderdata  where product_id = "
 									+ id + " and order_id=" + orderid + ") where p.product_id = " + id + "");
-					Jdbcpst.preparestmt("update  orderdata set order_status='CANCELLED' where order_id= ?", orderid);
+					Jdbcpst.preparestmt(
+							"update  orderdata set order_status='CANCELLED',total_amount=0 where order_id= ?", orderid);
 					Jdbcpst.preparestmt("update products set status='AVAILABLE'where stock > 0");
 					Jdbcpst.preparestmt(" update products set status='OUTOFSTOCK'where stock <= 0");
 
@@ -362,8 +363,18 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	// CHECK MAIL FOR ACC CREATION
 	public boolean checkmailcreate(String mail) {
-		String sql = "select mail_id from usersdata where mail_id='" + mail + "'";
-		return Jdbcpst.exists(sql);
+
+		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
+			String sql = "select mail_id from usersdata where mail_id='" + mail + "'";
+			try (ResultSet rs = stmt.executeQuery(sql)) {
+				if (rs.next()) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
+		}
+		return false;
 	}
 
 	// CHECK USERNAME FOR ACC CREATION
@@ -377,7 +388,6 @@ public class UserProfileDaoImpl implements UserProfileDao {
 			}
 		} catch (Exception e) {
 			LOGGER.error(Errormessage.INVALID_COLUMN_INDEX);
-
 		}
 		return false;
 	}

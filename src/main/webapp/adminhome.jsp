@@ -16,12 +16,15 @@
 	<h2>	<a href="Addproducts.jsp">Add Products</a></h2>
 	</center>
 	<br />
-	<br />
+
 	<center>
 		<h2><a href="adminproviewservlet">View products</a></h2>
 	</center>
 	
 
 	<br />
+	<center>
+		<h2><a href="totalrevenue.jsp">Total Income</a></h2>
+	</center>
 </body>
 </html>

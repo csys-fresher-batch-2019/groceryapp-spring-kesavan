@@ -59,7 +59,7 @@
 	<form action="search">
 
 
-		Search Products : <input type="text" name="field" pattern="[a-z]"
+		Search Products : <input type="text" name="field" pattern="[a-z]{1,}"
 			title="Type only characters" placeholder="Enter Product Name "
 			required />
 		<button type="submit">Search</button>
