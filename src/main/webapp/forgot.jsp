@@ -24,7 +24,9 @@
 						<tr>
 							<td>Enter MailId :</td>
 							<td><input type="text" name="mail"
-								placeholder="Enter Mail_id " required autofocus /></td>
+							pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+						title="Example:xyz@gmail.com" placeholder="Enter emailid "
+							 required autofocus /></td>
 						</tr>
 						<tr>
 							<td>Enter New Password :</td>
