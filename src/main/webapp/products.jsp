@@ -26,7 +26,7 @@
 		<%
 			String username = (String) session.getAttribute("LOG IN USER");
 		%>
-		</br> LOGIN AS
+		</br> LOGGED IN AS
 		<%=username.toUpperCase()%>
 </center>
 

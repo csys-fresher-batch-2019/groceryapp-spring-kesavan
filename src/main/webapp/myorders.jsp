@@ -26,7 +26,7 @@
 	%>
 	</br>
 	<center>
-		LOGIN AS
+		LOGGED IN AS
 		<%=username.toUpperCase()%></center>
 	<br />
 	<br />

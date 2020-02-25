@@ -21,14 +21,14 @@
 		<%
 			String username = (String) session.getAttribute("LOG IN USER");
 		%>
-		<br> LOGIN AS
+		<br> LOGGED IN AS
 		<%=username.toUpperCase()%>
 		<br>
 		<br>
 		<form action="Changeaddress">
 			Enter Your Address : <input type="text" name="address"
-				pattern="[1-9]{2,},[a-z]{5,},[a-z]{3,}"
-				title="Enter Door No,Streetname,city"
+				pattern="[0-9]{2,},[a-z]{3,},[a-z]{3,}"
+				title="Enter DoorNo,Streetname,city"
 				placeholder="Enter new address " required autofocus /> <br> <br>
 			Enter ZipCode : <input type="text" name="pincode" pattern="[0-9]{6}"
 				placeholder="6 - digit pincode " required /> <br>

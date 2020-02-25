@@ -23,7 +23,7 @@
 	%>
 	</br>
 	<center>
-		LOGIN AS
+		LOGGED IN AS
 		<%=username.toUpperCase()%></center>
 	<form action="changepass">
 		<center>
