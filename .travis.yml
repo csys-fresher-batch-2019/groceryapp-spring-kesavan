@@ -1,10 +1,10 @@
 language: java
 deploy:
   provider: cloudfoundry
-  username: writewaythinking@gmail.com
-  password: Selva9984*
+  username: kesavansiet@@gmail.com
+  password: 15031999@Pk7
   api: https://api.run.pivotal.io
-  organization: GroceryApp
+  organization: AppGrocery
   space: development
   manifest: manifest.yml
 script:
