@@ -27,7 +27,7 @@
 					<td>Enter email ID:</td>
 					<td><input type="text" name="Email"
 						pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-						title="Example:xyz@gmail.com" required /></td>
+						title="Example:xyz@gmail.com" placeholder="Enter emailid "required /></td>
 				</tr>
 			<tr>
 				<td><label for="phone">Enter Mobile number:</label></td>
