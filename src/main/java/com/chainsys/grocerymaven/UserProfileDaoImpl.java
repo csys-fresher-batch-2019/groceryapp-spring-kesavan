@@ -153,7 +153,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 							"update products p set p.stock=p.stock+ (select no_of_items from orderdata  where product_id = "
 									+ id + " and order_id=" + orderid + ") where p.product_id = " + id + "");
 					Jdbcpst.preparestmt(
-							"update  orderdata set order_status='CANCELLED',total_amount=0 where order_id= ?", orderid);
+							"update  orderdata set order_status='CANCELLED' where order_id= ?", orderid);
 					Jdbcpst.preparestmt("update products set status='AVAILABLE'where stock > 0");
 					Jdbcpst.preparestmt(" update products set status='OUTOFSTOCK'where stock <= 0");
 
