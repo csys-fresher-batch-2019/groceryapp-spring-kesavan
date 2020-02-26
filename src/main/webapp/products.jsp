@@ -94,7 +94,7 @@
 						<th>Status</th>
 						<th>Rating</th>
 						<th>Review</th>
-						<th>Click to Order</th>
+						<th>Selected Items</th>
 						<th>No_of_Items</th>
 					</tr>
 				</thead>

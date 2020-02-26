@@ -60,5 +60,5 @@ select * from proreview;
 select * from review;
 
  insert into proreview(product_id,rating,review)
-values(1432,4,'Good');
-delete from products where product_id=12
+values(2123,4,'Good');
+delete from proreview where product_id=2123 and rating=0

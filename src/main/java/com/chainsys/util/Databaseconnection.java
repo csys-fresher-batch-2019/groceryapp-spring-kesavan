@@ -13,7 +13,7 @@ public class Databaseconnection {
 		} catch (ClassNotFoundException e) {
 			LOGGER.debug(e);
 		}
-		// String url = "jdbc:oracle:thin:@3.6.224.170:1521:XE";
+		// String url = "jdbc:oracle:thin:@localhost:1521:XE",system","oracle"";
 		String url = "jdbc:mysql://3.6.224.170:3306/supermarket_kesavan_db";
 		String user = "kesavan";
 		String password = "kesavan";
