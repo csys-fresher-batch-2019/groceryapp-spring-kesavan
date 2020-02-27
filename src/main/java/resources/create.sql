@@ -48,9 +48,7 @@ rating float not null,
 constraint product_fk foreign key(product_id) references products(product_id)
 );
 
-drop table usersdata;
-drop table orderdata;
-drop table usersdata;
+
  
 
 select * from orderdata;
@@ -59,6 +57,6 @@ select * from products;
 select * from proreview;
 select * from review;
 
- insert into proreview(product_id,rating,review)
-values(2123,4,'Good');
-delete from proreview where product_id=2123 and rating=0
+drop table usersdata;
+drop table orderdata;
+drop table usersdata;
