@@ -61,5 +61,6 @@ drop table usersdata;
 drop table orderdata;
 drop table usersdata;
 
-update products set product_id=1005 where product_id=10020
+update products set quantity=5 where product_id=1003
 update proreview set rating=4,review='Good' where product_id=1005
+delete from products where product_id=1005

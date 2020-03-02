@@ -2,6 +2,7 @@ package com.chainsys;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.chainsys.grocerymaven.AdminProfileDaoImpl;
 import com.chainsys.grocerymaven.UserProfile;
+
 @WebServlet("/placeorder")
 
 public class placeorder extends HttpServlet {
@@ -24,13 +26,18 @@ public class placeorder extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("LOG IN USER");
 		ArrayList<UserProfile> items = (ArrayList<UserProfile>) session.getAttribute("FINALCART");
+		Map<Integer, Integer> items1 = (Map<Integer, Integer>) session.getAttribute("CARTS");
+
 		AdminProfileDaoImpl obj1 = new AdminProfileDaoImpl();
-		
-		
+
 		String type = request.getParameter("Paytype");
 		if (type.equals("COD")) {
 			try {
 				obj1.createOrder(items, username, "COD", 0);
+				items.clear();
+				items1.clear();
+				session.setAttribute("CARTS",items1);
+				session.setAttribute("FINALCART", items);
 				RequestDispatcher d = request.getRequestDispatcher("home.jsp");
 				d.forward(request, response);
 			} catch (Exception e) {

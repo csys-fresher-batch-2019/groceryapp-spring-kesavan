@@ -26,6 +26,7 @@ public class paywallet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("LOG IN USER");
 		ArrayList<UserProfile> items = (ArrayList<UserProfile>) session.getAttribute("FINALCART");
+		Map<Integer, Integer> items1 = (Map<Integer, Integer>) session.getAttribute("CARTS");
 		AdminProfileDaoImpl obj1 = new AdminProfileDaoImpl();
 		long mobile = Long.parseLong(request.getParameter("mobileno"));
 		int pin=Integer.parseInt(request.getParameter("pin"));
@@ -33,13 +34,17 @@ public class paywallet extends HttpServlet {
 		WalletAPI obj = new WalletAPI();
 		Map result = obj.paywallet(mobile, "GROCERY", amount);
 		String status=(String) result.get("status");
+		String msg=(String) result.get("errorMessage");
 		if(status.equals("SUCCESS")) {
 			int id=(int) result.get("transactionId");
 			obj1.createOrder(items, username, "CITIWALLET", id);
-			System.out.println("Order Placed");
+			items.clear();
+			items1.clear();
+			session.setAttribute("FINALCART",items);
+			session.setAttribute("CARTS",items1);
 			response.sendRedirect("paymentresult.jsp?res="+status);
 		}else {
-			response.sendRedirect("paymentresult.jsp?res="+status);
+			response.sendRedirect("paymentresult.jsp?res="+msg);
 		}
 
 	}

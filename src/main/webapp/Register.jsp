@@ -27,35 +27,37 @@
 					<td>Enter email ID:</td>
 					<td><input type="text" name="Email"
 						pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-						title="Example:xyz@gmail.com" placeholder="Enter emailid "required /></td>
+						title="Example:xyz@gmail.com" placeholder="Enter emailid "
+						required /></td>
 				</tr>
-			<tr>
-				<td><label for="phone">Enter Mobile number:</label></td>
-				<td><input type="tel" id="phone" name="Mobileno"
-					title="Please enter 10 digit mobile number"
-					pattern="[6-9]{1}[0-9]{9}" placeholder=" Enter Mobile_num" required /></td>
-			</tr>
+				<tr>
+					<td><label for="phone">Enter Mobile number:</label></td>
+					<td><input type="tel" id="phone" name="Mobileno"
+						title="Please enter 10 digit mobile number"
+						pattern="[6-9]{1}[0-9]{9}" placeholder=" Enter Mobile_num"
+						required /></td>
+				</tr>
 
-			<tr>
-				<td>Enter Password :</td>
-				<td><input type="password" name="pw"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-					title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-					placeholder="Enter Password" required /></td>
-			</tr>
-			<tr>
-				<td>Enter Address :</td>
-				<td><input type=text name="address"
-					pattern="[1-9]{1,},[a-z]{5,},[a-z]{3,}"
-					title="Enter Door No,Streetname,city" placeholder="Enter address"
-					required /></td>
-			</tr>
-			<tr>
-				<td>Enter ZipCode :</td>
-				<td><input type="text" name="pincode" pattern="[0-9]{6}"
-					title="Please match the Pincode format"
-					placeholder="6 - digit pincode " required />
-			</tr>
+				<tr>
+					<td>Enter Password :</td>
+					<td><input type="password" name="pw"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+						placeholder="Enter Password" required /></td>
+				</tr>
+				<tr>
+					<td>Enter Address :</td>
+					<td><input type=text name="address"
+						pattern="[1-9]{1,},[a-z]{5,},[a-z]{3,}"
+						title="Enter Door No,Streetname,city" placeholder="Enter address"
+						required /></td>
+				</tr>
+				<tr>
+					<td>Enter ZipCode :</td>
+					<td><input type="text" name="pincode" pattern="[0-9]{6}"
+						title="Please match the Pincode format"
+						placeholder="6 - digit pincode " required />
+				</tr>
 		</table>
 		<pre>
 </pre>

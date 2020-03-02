@@ -85,7 +85,7 @@
 				<td><a href="trackorder.jsp?order_id=<%=ud.getOrderid()%>">Track</a></td>
 				<%
 					}else{%>
-						<td>-------------------</td><td>----------------</td>
+						<td>------------------</td><td>----------------</td>
 				<% }%>	
 				
 			</tr>

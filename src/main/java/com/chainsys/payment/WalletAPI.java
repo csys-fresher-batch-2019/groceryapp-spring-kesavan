@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 public class WalletAPI {
 		public Map paywallet(long mobileNo,String merchantId, float amount) {
 			String url = "https://apiwalletappin.cfapps.io";
-			  //String url = "http://localhost:9000";
 			  String apiUrl = url + "/api/walletPayment?mobilenumber="+mobileNo+"&merchantId="+merchantId+"&amount="+amount;
 			  System.out.println(apiUrl);
 			  RestTemplate restTemplate = new RestTemplate(); 
@@ -20,5 +19,5 @@ public class WalletAPI {
 			HttpHeaders headers=new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 			return headers;
-		}       
+	}
 }
