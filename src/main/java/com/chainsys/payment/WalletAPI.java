@@ -1,16 +1,24 @@
-
-/*package com.chainsys.payment;
-
-import citiipay.implementation.TransactiondaoImpl;
-import citiipay.messages.DBException;
-import citiipay.models.Merchant;
-
+package com.chainsys.payment;
+import java.util.Map;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 public class WalletAPI {
-	public Merchant cardpayment(long mobileNo, int amount) throws DBException {
-		String merchantId="GROCERY";
-		TransactiondaoImpl obj1 = new TransactiondaoImpl();
-		Merchant obj = new Merchant();
-		obj=obj1.payToMerchant(merchantId, mobileNo, amount);
-		return obj;
-	}
-}*/
+		public Map paywallet(long mobileNo,String merchantId, float amount) {
+			String url = "https://apiwalletappin.cfapps.io";
+			  //String url = "http://localhost:9000";
+			  String apiUrl = url + "/api/walletPayment?mobilenumber="+mobileNo+"&merchantId="+merchantId+"&amount="+amount;
+			  System.out.println(apiUrl);
+			  RestTemplate restTemplate = new RestTemplate(); 
+			  ResponseEntity<Map> responseEntity = restTemplate.getForEntity(apiUrl, Map.class);
+			  Map body = responseEntity.getBody();
+			  System.out.println(body);
+			  return body;
+		}
+		public HttpHeaders getHeaders() {
+			HttpHeaders headers=new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			return headers;
+		}       
+}

@@ -61,4 +61,5 @@ drop table usersdata;
 drop table orderdata;
 drop table usersdata;
 
-update proreview set rating=4,review='Good' where product_id=1098
+update products set product_id=1005 where product_id=10020
+update proreview set rating=4,review='Good' where product_id=1005
