@@ -1,14 +1,14 @@
 
 create table products(
- product_name varchar(30) not null,
- product_id int primary key,
- manufacturer varchar(30),
- quantity float,
- unit varchar(25),
- price_Rs int not null,
- stock int,
- status varchar(25)
- );
+	 product_name varchar(30) not null,
+	 product_id int primary key,
+	 manufacturer varchar(30),
+	 quantity float,
+	 unit varchar(25),
+	 price_Rs int not null,
+	 stock int,
+	 status varchar(25)
+	 );
  
  create table usersdata(
 user_id int primary key auto_increment,
@@ -60,3 +60,5 @@ select * from review;
 drop table usersdata;
 drop table orderdata;
 drop table usersdata;
+
+update proreview set rating=4,review='Good' where product_id=1098

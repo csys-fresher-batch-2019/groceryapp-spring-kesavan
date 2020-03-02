@@ -2,6 +2,7 @@ package com.chainsys.controller;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +14,13 @@ import com.chainsys.grocerymaven.AdminProfile;
 import com.chainsys.grocerymaven.AdminProfileDao;
 import com.chainsys.grocerymaven.AdminProfileDaoImpl;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api")
 public class ProductController {
 
 	AdminProfileDao obj = new AdminProfileDaoImpl();
-	
+
 	@PostMapping("/addproduct")
 	public void addProduct(@RequestParam("pname") String pname, @RequestParam("pid") Integer pid,
 			@RequestParam("company") String company, @RequestParam("quantity") Float quantity,
@@ -35,20 +37,23 @@ public class ProductController {
 		AdminProfile[] p = { ob };
 		int a = obj.addProducts(p);
 	}
-	
+
 	@PostMapping("/addproduct1")
-	public void addProduct1(@RequestBody AdminProfile adminProfile ) {
-		AdminProfile[] p = { adminProfile };
+	public void addProduct1(@RequestBody AdminProfile addproducts) {
+		AdminProfile[] p = { addproducts };
 		int a = obj.addProducts(p);
 	}
-	
+
 	@GetMapping("/viewproducts")
 	public ArrayList<AdminProfile> list() {
 		AdminProfileDao obj = new AdminProfileDaoImpl();
 		return obj.viewProducts();
 	}
-	
-	
-	
+
+	@GetMapping("/updateproducts")
+	public void show(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) {
+		AdminProfileDao obj = new AdminProfileDaoImpl();
+		obj.updateProducts(stock, pid);
+	}
 
 }

@@ -106,7 +106,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		ArrayList<Ordersummary> productsview = new ArrayList<>();
 		try (Connection con = Databaseconnection.connect(); Statement stmt = con.createStatement();) {
 			LocalDate today = LocalDate.now();
-			String sql4 = "update orderdata set order_status = 'DELIVERED' where delivery_date = ?";
+			String sql4 = "update orderdata set order_status = 'DELIVERED' where order_status != 'CANCELLED' and delivery_date <= ?";
 			Object[] params = { Date.valueOf(today) };
 			Jdbcpst.preparestmt(sql4, params);
 

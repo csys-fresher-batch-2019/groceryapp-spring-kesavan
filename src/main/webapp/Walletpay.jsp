@@ -22,9 +22,9 @@
 <center>
 <form action="paywallet" >
 		<br /> Citipay Wallet MobileNumber : <input type="number"
-		name="mobileno" required /> <br /> 
+		name="mobileno" required /> <br /> <br>
 		Enter your Pin :<input type="number"
-		name="pin" required /> <br /> 
+		name="pin" required /> <br /> <br>
 		
 	<button type="submit">Submit</button>
 </form>

@@ -23,7 +23,7 @@
 			ArrayList<AdminProfile> list = (ArrayList) request.getAttribute("res");
 		%>
 		<center>
-
+		
 			<table border="1">
 				<thead>
 					<tr>
