@@ -50,7 +50,7 @@ public class ProductController {
 		return obj.viewProducts();
 	}
 
-	@GetMapping("/updateproducts")
+	@PostMapping("/updateproducts")
 	public void updateproducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) {
 		obj.updateProducts(stock, pid);
 	}
