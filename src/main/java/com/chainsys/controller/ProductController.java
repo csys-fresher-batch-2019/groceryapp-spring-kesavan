@@ -46,14 +46,12 @@ public class ProductController {
 	}
 
 	@GetMapping("/viewproducts")
-	public ArrayList<AdminProfile> list() {
-		AdminProfileDao obj = new AdminProfileDaoImpl();
+	public ArrayList<AdminProfile> viewproducts() {
 		return obj.viewProducts();
 	}
 
 	@GetMapping("/updateproducts")
-	public void show(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) {
-		AdminProfileDao obj = new AdminProfileDaoImpl();
+	public void updateproducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) {
 		obj.updateProducts(stock, pid);
 	}
 
