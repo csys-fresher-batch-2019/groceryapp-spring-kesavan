@@ -1,5 +1,5 @@
-<%@page import="com.chainsys.grocerymaven.AdminProfileDaoImpl"%>
-<%@page import="com.chainsys.grocerymaven.AdminProfileDao"%>
+<%@page import="com.chainsys.grocery.dao.impl.AdminProfileDaoImpl"%>
+<%@page import="com.chainsys.grocery.dao.AdminProfileDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html >
@@ -21,7 +21,7 @@
 			<select name="val">
 			<option value="COD">Cash on Delivery</option>
 							<option value="CARD">Card Payment</option>
-							<option value="WALLET">Wallet Payment</option>
+							<option value="CITIWALLET">Wallet Payment</option>
 							
 							<option value="All mode of Payments">All Modes of Pay</option>
 			</select><br><br>

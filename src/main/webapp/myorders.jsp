@@ -1,6 +1,6 @@
-<%@page import="com.chainsys.grocerymaven.Ordersummary"%>
-<%@page import="com.chainsys.grocerymaven.UserProfileDaoImpl"%>
-<%@page import="com.chainsys.grocerymaven.UserProfileDao"%>
+<%@page import="com.chainsys.grocery.model.Ordersummary"%>
+<%@page import="com.chainsys.grocery.dao.impl.UserProfileDaoImpl"%>
+<%@page import="com.chainsys.grocery.dao.UserProfileDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
