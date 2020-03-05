@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,35 +30,33 @@
 	<form action="changepass">
 		<center>
 			</br> <br /> Enter MailId : <input type="email" name="mail"
-				placeholder="Enter Mail_id " required autofocus /> <br />
-			<br />
+				placeholder="Enter Mail_id " required autofocus /> <br /> <br />
 		</center>
 		<center>
 			Enter New Password :<input type="password" name="npassword"
-			pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-						title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-				placeholder="Enter Password" required /> <br />
-			<br />
+				pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+				title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+				placeholder="Enter Password" required /> <br /> <br />
 		</center>
 		<center>
 			Re-type Password :<input type="password" name="cpassword"
-				placeholder="confirm Password" required /> <br />
-			<br />
+				placeholder="confirm Password" required /> <br /> <br />
 		</center>
 		<br />
 		<center>
 			<button type="submit">Submit</button>
 		</center>
 	</form>
+
 	<%
 		String res = (String) request.getParameter("res");
 	%>
 	<%
 		if (res != null) {
 	%>
-	<script>
-		alert("Password Mismatch Try Again");
-	</script>
+<script>
+alert("Password mismatch try again")
+</script>
 	<%
 		}
 	%>

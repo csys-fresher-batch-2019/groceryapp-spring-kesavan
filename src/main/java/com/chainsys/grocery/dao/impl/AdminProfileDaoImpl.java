@@ -33,7 +33,6 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 				a = 1;
 
 			} catch (Exception e) {
-				a = 0;
 				LOGGER.debug(Errormessage.INVALID_COLUMN_INDEX);
 			}
 			try {

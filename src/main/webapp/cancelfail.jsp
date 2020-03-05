@@ -38,7 +38,7 @@
 		</br>
 
 		<button>
-			<a href="myorders.jsp">MyOrders</a>
+			<a href="viewmyorders">MyOrders</a>
 		</button>
 	</center>
 

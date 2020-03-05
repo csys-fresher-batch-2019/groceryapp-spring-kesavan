@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   
 <!DOCTYPE html PUBLIC >
 <html>
 <head>
@@ -30,11 +32,14 @@
 
 			</table>
 		</form>
-		<%
+		
+		
+		
+		 <%
 			String result = (String) request.getParameter("res");
 			if (result != null) {
 				out.println("<center><font color=red><br>" + result + "</font></center>");
 			}
-		%>
+		%> 
 </body>
 </html>

@@ -30,7 +30,7 @@
 	</center>
 	<br />
 	<center>
-		<h3><a href="myorders.jsp">MyOrders</a></h3>
+		<h3><a href="viewmyorders">MyOrders</a></h3>
 	</center>
 	<br />
 	<center>

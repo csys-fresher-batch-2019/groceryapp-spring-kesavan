@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -55,24 +57,29 @@
 				<br>
 				<br>
 			</table>
-			<br>
-			<br>
-			<button type="submit">Submit</button>	<button>
-			<a href="adminhome.jsp">Home</a>
-		</button>
+			<br> <br>
+			<button type="submit">Submit</button>
+			<button>
+				<a href="adminhome.jsp">Home</a>
+			</button>
 		</form>
-		
-	
-		<%
-			String res = (String) request.getParameter("result");
-		%>
-		<%
-			if (res!=null && res.equals("true")) {
-		%>
-		<script>
-			alert("Product Added Succesfully");
-		</script>
-		<%
-			} %>
+		<c:choose>
+			<c:when test="${empty result}">
+			</c:when>
+			<c:otherwise>
+				<c:when test="${result}">
+					<script>
+						alert("Product Added Succesfully");
+					</script>
+				</c:when>
+				<c:otherwise>
+					<script>
+						alert("Product Not added ");
+					</script>
+				</c:otherwise>
+			</c:otherwise>
+		</c:choose>
+
+
 	</body>
 </html>

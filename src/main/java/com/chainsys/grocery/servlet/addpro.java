@@ -30,6 +30,7 @@ public class addpro extends HttpServlet {
 		AdminProfile[] p = {ob};
 		AdminProfileDao obj=new AdminProfileDaoImpl();
 		int a=obj.addProducts(p);
+		System.out.println(a);
 		if(a==1) {
 		String r="true";
 		RequestDispatcher d = request.getRequestDispatcher("Addproducts.jsp?result="+r);

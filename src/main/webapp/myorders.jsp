@@ -32,9 +32,7 @@
 	<br />
 
 	<%
-		UserProfileDao obj = new UserProfileDaoImpl();
-		int user = obj.checkuserid(username);
-		ArrayList<Ordersummary> orders = obj.ViewOrder(user);
+		ArrayList<Ordersummary> orders = (ArrayList) request.getAttribute("list");
 		if(orders.size()>0){
 	%>
 	<table border="1">

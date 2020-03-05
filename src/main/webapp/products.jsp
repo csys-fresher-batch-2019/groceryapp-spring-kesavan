@@ -1,6 +1,7 @@
 <%@page import="com.chainsys.grocery.model.UserDisplay"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@page import="com.chainsys.grocery.dao.impl.UserProfileDaoImpl"%>
 <%@page import="com.chainsys.grocery.dao.UserProfileDao"%>
@@ -71,10 +72,10 @@
 			out.println("<center><font color=green><br>" + result + "</font></center>");
 		}
 	%>
-
 	<%
 		ArrayList<UserDisplay> list = (ArrayList) request.getAttribute("listpro");
 		if (list.size() > 0) {
+			int i=0;
 	%>
 	<center>
 		<br>
@@ -99,60 +100,59 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						int i = 1;
-							for (UserDisplay ud : list) {
-					%>
-					<tr>
+					<c:forEach items="${listpro}" var="ud">
+						<c:set value="0" var="i"></c:set>
+						<tr>
+							<td><%=++i %></td>
+							<td>${ud.productName}</td>
+							<td>${ud.productId}</td>
+							<td>${ud.manufacturer}</td>
+							<td>${ud.quantity}</td>
+							<td>${ud.unit}</td>
+							<td>${ud.priceRS}</td>
+							<td>${ud.stock}</td>
+							<td>${ud.status}</td>
+							<td>${ud.rating}</td>
+							<td>${ud.review}</td>
+							<td><input type="checkbox" name="pid"
+								id="pid_${ud.productId}" onchange="disable(${ud.productId})"
+								value="${ud.productId}"></td>
+							<c:choose>
+								<c:when test="${ud.stock == 0}">
+									<td><select name="qty_${ud.productId}"
+										onchange="disable(${ud.productId})" disabled>
+											<option value="0"></option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+									</select></td>
+								</c:when>
+								<c:otherwise>
+									<td><select name="qty_${ud.productId}"
+										onchange="disable(${ud.productId})" autofocus>
+											<option value="0"></option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+									</select></td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+					</c:forEach>
 
-						<td><%=i++%></td>
-						<td><%=ud.getProductName()%></td>
-						<td><%=ud.getProductId()%></td>
-						<td><%=ud.getManufacturer()%></td>
-						<td><%=ud.getQuantity()%></td>
-						<td><%=ud.getUnit()%></td>
-						<td><%=ud.getPriceRS()%></td>
-						<td><%=ud.getStock()%></td>
-						<td><%=ud.getStatus()%></td>
-						<td><%=ud.getRating()%></td>
-						<td><%=ud.getReview()%></td>
-						<td><input type="checkbox" name="pid"
-							id="pid_<%=ud.getProductId()%>"
-							onchange="disable(<%=ud.getProductId()%>)"
-							value="<%=ud.getProductId()%>"></td>
-						<%
-							if ((int) ud.getStock() == 0) {
-						%>
-						<td><select name="qty_<%=ud.getProductId()%>"
-							onchange="disable(<%=ud.getProductId()%>)" disabled>
-								<option value="0"></option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-						</select></td>
-						<%
-							} else {
-						%>
-						<td><select name="qty_<%=ud.getProductId()%>"
-							onchange="disable(<%=ud.getProductId()%>)" autofocus>
-								<option value="0"></option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-						</select></td>
-					</tr>
 					<%
-						}
-							}
 						} else {
 					%>
-					<h3>No results found</h3>
+					<h3>No results found</h3><br>
+					<button>
+			<a href="productlist">Back</a>
+		</button>
 					<%
 						}
 					%>
@@ -161,17 +161,15 @@
 			<br> <br>
 
 			<button type="submit">Add to Cart</button>
-
 		</form>
 		<br>
 		<button>
 			<a href="home.jsp">Home</a>
 		</button>
+			
 		<script>
 						function disable(productId) {
-								 
-								var i=0;
-								var ch = document.getElementById("pid_" + productId);
+							var ch = document.getElementById("pid_" + productId);
 								if (ch.checked){
 									ch.checked=false;
 								}
