@@ -28,7 +28,7 @@ public class sort extends HttpServlet {
 			UserService obj = new UserService();
 			ArrayList<UserDisplay> productlist;
 			try {
-				productlist = obj.ViewProducts(a);
+				productlist = obj.viewProducts(a);
 				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);
@@ -40,7 +40,7 @@ public class sort extends HttpServlet {
 			UserService obj = new UserService();
 			ArrayList<UserDisplay> productlist;
 			try {
-				productlist = obj.ViewProducts(a);
+				productlist = obj.viewProducts(a);
 				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);

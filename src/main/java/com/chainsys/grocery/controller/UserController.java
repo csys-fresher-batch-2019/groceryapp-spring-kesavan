@@ -19,8 +19,8 @@ import com.chainsys.grocery.util.DBException;
 public class UserController {
 	UserProfileDao obj= new UserProfileDaoImpl();
 	@GetMapping("/viewproducts")
-	public ArrayList<UserDisplay> viewproducts(@RequestParam(" ") String a) throws DBException {
-		return obj.ViewProducts(a);
+	public ArrayList<UserDisplay> viewProducts(@RequestParam(" ") String a) throws DBException {
+		return obj.viewProducts(a);
 	}
 	
 }

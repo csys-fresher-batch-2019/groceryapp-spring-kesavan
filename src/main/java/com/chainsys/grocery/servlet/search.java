@@ -30,7 +30,7 @@ public class search extends HttpServlet {
 					+ (a.substring(0, 1).toString().toUpperCase() + a.substring(1, a.length())) + "%'";
 			ArrayList<UserDisplay> list = null;
 			try {
-				list = obj.ViewProducts(b);
+				list = obj.viewProducts(b);
 			} catch (DBException e1) {
 				e1.printStackTrace();
 			}

@@ -23,7 +23,7 @@ public class productlist extends HttpServlet {
 		UserService obj = new UserService();
 		ArrayList<UserDisplay> list;
 		try {
-			list = obj.ViewProducts(a);
+			list = obj.viewProducts(a);
 			request.setAttribute("listpro", list);
 			RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 			d.forward(request, response);

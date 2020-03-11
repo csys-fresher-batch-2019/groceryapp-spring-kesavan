@@ -62,6 +62,7 @@ drop table orderdata;
 drop table usersdata;
 
 update products set quantity=5 where product_id=1003
-update proreview set rating=3,review='Average' where product_id=1001
-delete from products where product_id=1027
-delete from products where product_id=1001
+update proreview set rating=3,review='Average' where product_id=1219
+
+delete from proreview where product_id=1006;
+delete from products where product_id=909

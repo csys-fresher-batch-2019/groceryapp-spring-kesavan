@@ -38,9 +38,9 @@ public class register extends HttpServlet {
 		boolean mail = false  ;
 		boolean user = false ; 
 		try {
-			mobile = userService.checkmobilenocreate(c);
-			mail=userService.checkmailcreate(b);
-			user=userService.checkusernamecreate(a);
+			mobile = userService.checkMobileNoCreate(c);
+			mail=userService.checkMailCreate(b);
+			user=userService.checkUserNameCreate(a);
 		} catch (DBException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -52,7 +52,7 @@ public class register extends HttpServlet {
 			
 			try {
 				r="fail";
-				userService.CreateAccount(a, d, address, c, b);
+				userService.createAccount(a, d, address, c, b);
 			} catch (DBException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -62,7 +62,7 @@ public class register extends HttpServlet {
 
 		} else {
 			try {
-				id = userService.CreateAccount(a, d, address, c, b);
+				id = userService.createAccount(a, d, address, c, b);
 				RequestDispatcher h = request.getRequestDispatcher("index.jsp");
 				h.forward(request, response);
 

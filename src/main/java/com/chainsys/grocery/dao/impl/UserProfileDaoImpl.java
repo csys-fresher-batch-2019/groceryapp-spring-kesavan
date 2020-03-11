@@ -26,7 +26,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	private JdbcTemplate jdbcTemplate;
 
 	// CREATE ACCOUNT
-	public int CreateAccount(String user, String pass, String address, long mobile, String mail) throws DBException {
+	public int createAccount(String user, String pass, String address, long mobile, String mail) throws DBException {
 		int rows = 0;
 		try (Connection con = DatabaseConnection.connect();) {
 			String sql = "insert into usersdata(user_name,delivery_address,password,phone_no,mail_id) "
@@ -42,7 +42,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// LOGIN
-	public boolean Login(String username, String pass) throws SQLException, DBException {
+	public boolean login(String username, String pass) throws SQLException, DBException {
 		boolean res = false;
 		String sql = "select user_name,password from usersdata where user_name = ? and password =?";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
@@ -62,7 +62,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// VIEW PRODUCTS
-	public ArrayList<UserDisplay> ViewProducts(String a) throws DBException {
+	public ArrayList<UserDisplay> viewProducts(String a) throws DBException {
 		ArrayList<UserDisplay> products = new ArrayList<UserDisplay>();
 		String sql = "select p.*,pr.review,pr.rating  from products p,proreview pr where p.product_id = pr.product_id "+a;
 		try (Connection con = DatabaseConnection.connect(); Statement pst = con.createStatement();) {
@@ -92,7 +92,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	// PLACE ORDER
 
-	public ArrayList<UserProfile> PlaceOrder(ArrayList selecteditems, String username, String paytype, int transId) throws DBException, SQLException {
+	public ArrayList<UserProfile> placeOrder(ArrayList selecteditems, String username, String paytype, int transId) throws DBException, SQLException {
 
 		AdminProfileDaoImpl obj = new AdminProfileDaoImpl();
 		obj.createOrder(selecteditems, username, paytype, transId);
@@ -101,7 +101,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// VIEW ORDERSUMMARY
-	public ArrayList<OrderSummary> ViewOrder(int userid) throws DBException {
+	public ArrayList<OrderSummary> viewOrder(int userid) throws DBException {
 		ArrayList<OrderSummary> productsview = new ArrayList<>();
 		String sql = "select order_id,product_name,manufacturer,no_of_items,price_per_item,total_amount,"
 				+ "order_date,delivery_date,delivery_address,order_status,payment,transaction_id  from orderdata o "
@@ -153,7 +153,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		String sql = "select product_id from orderdata where order_id= ? ";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			UserProfileDaoImpl obj = new UserProfileDaoImpl();
-			int days = obj.Trackordercancel(orderid);
+			int days = obj.trackOrderCancel(orderid);
 			System.out.println("days"+days);
 			if (days == 0) {
 				pst.setInt(1, orderid);
@@ -196,7 +196,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// TRACKORDER
-	public String Trackorder(int orderid) throws DBException {
+	public String trackOrder(int orderid) throws DBException {
 		String s = "";
 		String sql = "select order_date from orderdata where order_id=?";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
@@ -252,7 +252,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	 */
 
 	// CHANGE PASSWORD
-	public int Forgotpassword(String mail, String pass) throws DBException {
+	public int forgotPassword(String mail, String pass) throws DBException {
 		int rows=Jdbcpst.preparestmt("update usersdata set password = ? where mail_id=?", pass, mail);
 		return rows;
 	}
@@ -260,7 +260,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	// CHANGE ADDRESS
 	public void changeAddress(String username, String address) throws DBException {
 		try {
-			int id = checkuserid(username);
+			int id = checkUserId(username);
 			Jdbcpst.preparestmt("update usersdata set delivery_address= ? where user_id= ?", address, id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -269,7 +269,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// USERNAME CHECK FOR FORGOT PASSWORD
-	public boolean checkusername(String username) throws DBException {
+	public boolean checkUsername(String username) throws DBException {
 		boolean res = false;
 		String sql = "select user_name from usersdata where user_name=?";
 		int rows = Jdbcpst.preparestmt(sql, username);
@@ -281,7 +281,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// DISPLAY USERID
-	public int checkuserid(String user) throws DBException {
+	public int checkUserId(String user) throws DBException {
 		int userid = 0;
 		String sql = "select user_id from usersdata where user_name= ? ";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
@@ -311,7 +311,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// CHECK USERNAME FOR ACC CREATION
-	public boolean checkusernamecreate(String username) throws DBException {
+	public boolean checkUsernameCreate(String username) throws DBException {
 		boolean res = false;
 		String sql = "select user_name from usersdata where user_name=?";
 		int rows = Jdbcpst.preparestmt(sql, username);
@@ -322,7 +322,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	}
 
 	// CHECK MOBILE NO FOR ACC CREATION
-	public boolean checkmobilenocreate(long mobile) throws DBException {
+	public boolean checkMobilenoCreate(long mobile) throws DBException {
 		boolean res = false;
 		String sql = "select phone_no from usersdata where phone_no=?";
 		int rows = Jdbcpst.preparestmt(sql, mobile);
@@ -342,7 +342,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	 */
 
 	// TRACK FOR CAMCEL
-	public int Trackordercancel(int orderid) throws DBException {
+	public int trackOrderCancel(int orderid) throws DBException {
 		int days = 0;
 		String sql = "select order_date from orderdata where order_id= ? ";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
@@ -373,7 +373,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 				if (rs.next()) {
 					String mail1 = rs.getString("mail_id");
 					if (mail.equals(mail1)) {
-						int rows=Forgotpassword(mail, pass);
+						int rows=forgotPassword(mail, pass);
 						res = true;
 					} else {
 						LOGGER.error(ErrorMessage.VERIFICATION_FAILED);
@@ -390,7 +390,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	// CHECK MAIL FOR CORRESSPONDING USER WHILE USER NOT LOGGED IN [ FORGOT
 	// PASSWORD]
-	public boolean checkmailuser(String mail, String user) throws DBException, SQLException {
+	public boolean checkMailUser(String mail, String user) throws DBException, SQLException {
 		boolean res = false;
 		String sql = "select mail_id from usersdata where user_name=?";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {

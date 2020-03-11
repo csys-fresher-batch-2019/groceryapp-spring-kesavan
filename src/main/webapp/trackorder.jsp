@@ -29,9 +29,9 @@
 		<br>
 		
 		<%
-		UserProfileDaoImpl obj=new UserProfileDaoImpl();
-		String a=obj.Trackorder(orderId);
-		%>
+					UserProfileDaoImpl obj=new UserProfileDaoImpl();
+						String a=obj.trackOrder(orderId);
+				%>
 		
 		<br><br>
 		

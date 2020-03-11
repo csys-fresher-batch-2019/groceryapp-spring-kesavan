@@ -46,7 +46,7 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 
 		UserProfileDao obj = new UserProfileDaoImpl();
 
-		int userId = obj.checkuserid(user);
+		int userId = obj.checkUserId(user);
 		LocalDate today = LocalDate.now();
 		System.out.println(today);
 		LocalDate deliveryDate = today.plusDays(3);

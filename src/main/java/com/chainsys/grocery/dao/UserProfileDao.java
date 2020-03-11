@@ -10,19 +10,19 @@ import com.chainsys.grocery.util.DBException;
 
 public interface UserProfileDao {
 
-	int CreateAccount(String user, String pass, String address, long mobile, String mail)
+	int createAccount(String user, String pass, String address, long mobile, String mail)
 			throws SQLException, DBException;
 
-	boolean Login(String username, String password) throws DBException, SQLException;
+	boolean login(String username, String password) throws DBException, SQLException;
 
-	int Forgotpassword(String mailid, String password) throws DBException;
+	int forgotPassword(String mailid, String password) throws DBException;
 
-	ArrayList<UserDisplay> ViewProducts(String a) throws DBException;
+	ArrayList<UserDisplay> viewProducts(String a) throws DBException;
 
-	ArrayList<UserProfile> PlaceOrder(ArrayList<?> o, String username, String payment, int Transactionid)
+	ArrayList<UserProfile> placeOrder(ArrayList<?> o, String username, String payment, int Transactionid)
 			throws DBException, SQLException;
 
-	ArrayList<OrderSummary> ViewOrder(int userid) throws DBException;
+	ArrayList<OrderSummary> viewOrder(int userid) throws DBException;
 
 	// void Review(int id, int rating);
 	
@@ -31,24 +31,24 @@ public interface UserProfileDao {
 
 	String cancelOrder(int orderid) throws DBException;
 
-	String Trackorder(int orderid) throws DBException;
+	String trackOrder(int orderid) throws DBException;
 
-	int Trackordercancel(int orderid) throws DBException;
+	int trackOrderCancel(int orderid) throws DBException;
 
-	boolean checkusername(String username) throws DBException;
+	boolean checkUsername(String username) throws DBException;
 
-	int checkuserid(String user) throws DBException;
+	int checkUserId(String user) throws DBException;
 
 	boolean checkMailPass(String mail, String user, String pass) throws DBException;
 
 	void changeAddress(String username, String address) throws DBException;
 
-	boolean checkmailuser(String mail, String user) throws DBException, SQLException;
+	boolean checkMailUser(String mail, String user) throws DBException, SQLException;
 
 	// Acc creation validation
 	boolean checkMailCreate(String mail) throws DBException;
 
-	boolean checkusernamecreate(String username) throws DBException;
+	boolean checkUsernameCreate(String username) throws DBException;
 
-	boolean checkmobilenocreate(long mobile) throws DBException;
+	boolean checkMobilenoCreate(long mobile) throws DBException;
 }

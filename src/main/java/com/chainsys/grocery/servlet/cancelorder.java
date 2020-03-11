@@ -26,7 +26,7 @@ public class cancelorder extends HttpServlet {
 			UserService obj = new UserService();
 
 			try {
-				String s = obj.Cancelorder(orderid);
+				String s = obj.cancelOrder(orderid);
 				request.setAttribute("status", s);
 				RequestDispatcher d = request.getRequestDispatcher("cancelfail.jsp");
 				d.forward(request, response);
@@ -34,7 +34,7 @@ public class cancelorder extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			RequestDispatcher d = request.getRequestDispatcher("myorders.jsp");
+			RequestDispatcher d = request.getRequestDispatcher("viewmyorders");
 			d.forward(request, response);
 		}
 

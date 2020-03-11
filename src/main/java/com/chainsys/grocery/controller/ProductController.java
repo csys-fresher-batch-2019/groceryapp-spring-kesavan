@@ -48,12 +48,12 @@ public class ProductController {
 	}
 
 	@GetMapping("/viewproducts")
-	public ArrayList<AdminProfile> viewproducts() throws DBException {
+	public ArrayList<AdminProfile> viewProducts() throws DBException {
 		return obj.viewProducts();
 	}
 
 	@PostMapping("/updateproducts")
-	public void updateproducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) throws DBException {
+	public void updateProducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) throws DBException {
 		obj.updateProducts(stock, pid);
 	}
 

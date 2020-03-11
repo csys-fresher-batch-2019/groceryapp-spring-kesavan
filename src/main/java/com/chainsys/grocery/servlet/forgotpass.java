@@ -27,7 +27,7 @@ public class forgotpass extends HttpServlet {
 			UserService obj = new UserService();
 			boolean res1 = false;
 			try {
-				res1 = obj.checkmailpass(a, username, c);
+				res1 = obj.checkMailPass(a, username, c);
 				System.out.println(res1);
 			} catch (DBException e1) {
 				// TODO Auto-generated catch block

@@ -28,14 +28,14 @@ public class viewmyorders extends HttpServlet {
 		UserService obj = new UserService();
 		int userid = 0;
 		try {
-			userid = obj.checkuserid(username);
+			userid = obj.checkUserId(username);
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		ArrayList<OrderSummary> orders = null;
 		try {
-			orders = obj.ViewOrder(userid);
+			orders = obj.viewOrder(userid);
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

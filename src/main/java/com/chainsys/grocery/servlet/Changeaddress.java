@@ -26,7 +26,7 @@ public class Changeaddress extends HttpServlet {
 		String address1=address+"-"+pin;
 		UserService obj=new UserService();
 		try {
-			obj.changeaddress(username, address1);
+			obj.changeAddress(username, address1);
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

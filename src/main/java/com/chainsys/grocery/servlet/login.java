@@ -22,7 +22,7 @@ public class login extends HttpServlet {
 		String b = request.getParameter("password");
 		UserService obj = new UserService();
 		try {
-			boolean res = obj.Login(a, b);
+			boolean res = obj.login(a, b);
 			if (res) {
 				HttpSession session = request.getSession();
 				session.setAttribute("LOG IN USER", a);

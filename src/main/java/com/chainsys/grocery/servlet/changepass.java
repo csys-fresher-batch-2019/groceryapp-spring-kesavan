@@ -27,9 +27,9 @@ public class changepass extends HttpServlet {
 		String c = request.getParameter("cpassword");
 		UserService obj = new UserService();
 		try {
-			if (obj.checkmailuser(a, username)) {
+			if (obj.checkMailUser(a, username)) {
 				if (b.equals(c)) {
-					boolean res1 = obj.checkmailpass(a, username, c);
+					boolean res1 = obj.checkMailPass(a, username, c);
 					try {
 						if (res1) {
 							String st="true";
