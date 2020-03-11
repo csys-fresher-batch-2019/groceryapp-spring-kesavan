@@ -101,12 +101,8 @@
 			}
 		%>
 		</form>
-			
 		<br>
-		<br>
-
-
-		
+		<br>		
 		<%
 			String res = (String) request.getParameter("result");
 		%>

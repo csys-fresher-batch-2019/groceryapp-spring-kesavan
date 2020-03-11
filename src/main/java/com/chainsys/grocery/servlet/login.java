@@ -1,6 +1,7 @@
 package com.chainsys.grocery.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.chainsys.grocery.dao.UserProfileDao;
-import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
+import com.chainsys.grocery.service.UserService;
 
 @WebServlet("/login")
 public class login extends HttpServlet {
@@ -20,7 +20,7 @@ public class login extends HttpServlet {
 			throws ServletException, IOException {
 		String a = request.getParameter("Username");
 		String b = request.getParameter("password");
-		UserProfileDao obj = new UserProfileDaoImpl();
+		UserService obj = new UserService();
 		try {
 			boolean res = obj.Login(a, b);
 			if (res) {

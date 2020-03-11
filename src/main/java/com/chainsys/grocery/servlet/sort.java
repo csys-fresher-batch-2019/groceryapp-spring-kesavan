@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
 import com.chainsys.grocery.model.UserDisplay;
+import com.chainsys.grocery.service.UserService;
+import com.chainsys.grocery.util.DBException;
+
 @WebServlet("/sort")
 
 public class sort extends HttpServlet {
@@ -21,31 +23,32 @@ public class sort extends HttpServlet {
 			throws ServletException, IOException {
 
 		String a = request.getParameter("type");
-		if (a.isEmpty()||a.equals(null)) {
+		if (a.isEmpty() || a.equals(null)) {
 			a = " ";
-			UserProfileDaoImpl obj = new UserProfileDaoImpl();
-			ArrayList<UserDisplay> list = obj.ViewProducts(a);
+			UserService obj = new UserService();
+			ArrayList<UserDisplay> productlist;
 			try {
-
-				request.setAttribute("listpro", list);
+				productlist = obj.ViewProducts(a);
+				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);
-
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		} else {
-			UserProfileDaoImpl obj = new UserProfileDaoImpl();
-			ArrayList<UserDisplay> list = obj.ViewProducts(a);
+			UserService obj = new UserService();
+			ArrayList<UserDisplay> productlist;
 			try {
-
-				request.setAttribute("listpro", list);
+				productlist = obj.ViewProducts(a);
+				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);
-
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (DBException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+
 		}
 	}
 

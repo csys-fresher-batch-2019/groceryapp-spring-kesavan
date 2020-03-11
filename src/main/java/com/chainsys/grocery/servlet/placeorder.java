@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.chainsys.grocery.dao.impl.AdminProfileDaoImpl;
 import com.chainsys.grocery.model.UserProfile;
+import com.chainsys.grocery.service.AdminService;
 
 @WebServlet("/placeorder")
 
@@ -28,7 +28,7 @@ public class placeorder extends HttpServlet {
 		ArrayList<UserProfile> items = (ArrayList<UserProfile>) session.getAttribute("FINALCART");
 		Map<Integer, Integer> items1 = (Map<Integer, Integer>) session.getAttribute("CARTS");
 
-		AdminProfileDaoImpl obj1 = new AdminProfileDaoImpl();
+		AdminService obj1 = new AdminService();
 
 		String type = request.getParameter("Paytype");
 		if (type.equals("COD")) {

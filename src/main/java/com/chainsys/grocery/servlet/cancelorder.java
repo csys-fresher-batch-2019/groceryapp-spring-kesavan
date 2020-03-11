@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
+import com.chainsys.grocery.service.UserService;
 @WebServlet("/cancelorder")
 
 public class cancelorder extends HttpServlet {
@@ -23,7 +23,7 @@ public class cancelorder extends HttpServlet {
 
 		String a = request.getParameter("confirm");
 		if (a.equals("yes")) {
-			UserProfileDaoImpl obj = new UserProfileDaoImpl();
+			UserService obj = new UserService();
 
 			try {
 				String s = obj.Cancelorder(orderid);

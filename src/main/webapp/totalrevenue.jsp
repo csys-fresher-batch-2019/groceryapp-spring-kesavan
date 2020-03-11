@@ -22,8 +22,7 @@
 			<option value="COD">Cash on Delivery</option>
 							<option value="CARD">Card Payment</option>
 							<option value="CITIWALLET">Wallet Payment</option>
-							
-							<option value="All mode of Payments">All Modes of Pay</option>
+							<option value="">All Modes of Pay</option>
 			</select><br><br>
 				<br>
 				<button type="SUBMIT">Submit</button>

@@ -1,4 +1,4 @@
-<%@page import="com.chainsys.grocery.model.Ordersummary"%>
+<%@page import="com.chainsys.grocery.model.OrderSummary"%>
 <%@page import="com.chainsys.grocery.dao.impl.UserProfileDaoImpl"%>
 <%@page import="com.chainsys.grocery.dao.UserProfileDao"%>
 <%@page import="java.util.ArrayList"%>
@@ -32,8 +32,8 @@
 	<br />
 
 	<%
-		ArrayList<Ordersummary> orders = (ArrayList) request.getAttribute("list");
-		if(orders.size()>0){
+		ArrayList<OrderSummary> orders = (ArrayList) request.getAttribute("list");
+			if(orders.size()>0){
 	%>
 	<table border="1">
 		<thead>
@@ -57,7 +57,7 @@
 		<tbody>
 			<%
 				int i = 1;
-				for (Ordersummary ud : orders) {
+					for (OrderSummary ud : orders) {
 			%>
 			<tr>
 

@@ -2,7 +2,7 @@ package com.chainsys.grocery.model;
 
 import java.sql.Date;
 
-public class Ordersummary {
+public class OrderSummary {
 
 	public int getOrderid() {
 		return orderid;

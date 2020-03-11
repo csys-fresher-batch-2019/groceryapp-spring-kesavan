@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.UserProfileDao;
-import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
 import com.chainsys.grocery.model.UserDisplay;
+import com.chainsys.grocery.service.UserService;
 @WebServlet("/productlist")
 
 public class productlist extends HttpServlet {
@@ -20,8 +19,8 @@ public class productlist extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String a = "";
-		UserProfileDao obj = new UserProfileDaoImpl();
+		String a = " ";
+		UserService obj = new UserService();
 		ArrayList<UserDisplay> list;
 		try {
 			list = obj.ViewProducts(a);

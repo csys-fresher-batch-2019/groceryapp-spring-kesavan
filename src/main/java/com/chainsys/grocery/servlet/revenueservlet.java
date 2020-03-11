@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.AdminProfileDao;
-import com.chainsys.grocery.dao.impl.AdminProfileDaoImpl;
+import com.chainsys.grocery.service.AdminService;
+import com.chainsys.grocery.util.DBException;
 
 @WebServlet("/revenueservlet")
 public class revenueservlet extends HttpServlet {
@@ -18,20 +18,19 @@ public class revenueservlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AdminProfileDao obj = new AdminProfileDaoImpl();
+		AdminService obj = new AdminService();
 		String a = request.getParameter("val");
-		if (a.equals("All mode of Payments")) {
-			String c="";
-			int total = obj.revenue(c);
+			int total=0;
+			try {
+				total = obj.revenue(a);
+			} catch (DBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String b = Integer.toString(total);
 			request.setAttribute("res", b);
 			request.setAttribute("type", a);
-		} else {
-			int total = obj.revenue(a);
-			String b = Integer.toString(total);
-			request.setAttribute("res", b);
-			request.setAttribute("type", a);
-		}
+		
 		RequestDispatcher d = request.getRequestDispatcher("totalrevenue.jsp");
 		d.forward(request, response);
 	}

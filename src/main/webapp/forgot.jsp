@@ -45,14 +45,6 @@
 					<br>
 					<button type="submit">Submit</button>
 			</form>
-			<!-- 
-			<c:when test="${empty result}">
-			</c:when>
-			<c:otherwise>
-				<script>
-					alert("Password Mismatch Retry Again");
-				</script>
-			</c:otherwise> -->
 			<%
 				String res = (String) request.getParameter("result");
 			%>

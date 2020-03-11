@@ -2,6 +2,7 @@ package com.chainsys.grocery.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.dao.UserProfileDao;
 import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
+import com.chainsys.grocery.service.UserService;
+import com.chainsys.grocery.util.DBException;
 
 @WebServlet("/register")
 
@@ -28,22 +31,38 @@ public class register extends HttpServlet {
 		String e = request.getParameter("address");
 		String f = request.getParameter("pincode");
 		String address = e + "-" + f;
-		UserProfileDao obj = new UserProfileDaoImpl();
+		UserService userService = new UserService();
 		int id = 0;
-		boolean mobile = obj.checkmobilenocreate(c);
-		boolean mail = obj.checkmailcreate(b);
-		boolean user = obj.checkusernamecreate(a);
+		String r = "";
+		boolean mobile = false;
+		boolean mail = false  ;
+		boolean user = false ; 
+		try {
+			mobile = userService.checkmobilenocreate(c);
+			mail=userService.checkmailcreate(b);
+			user=userService.checkusernamecreate(a);
+		} catch (DBException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		System.out.println("mobile"+mobile);
 		System.out.println("mail"+mail);System.out.println("user"+user);
-		if (user || mail || user) {
-			String r = "fail";
+		if (user || mail || mobile) {
+			
+			try {
+				r="fail";
+				userService.CreateAccount(a, d, address, c, b);
+			} catch (DBException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			RequestDispatcher h = request.getRequestDispatcher("Register.jsp?status=" + r);
 			h.forward(request, response);
 
 		} else {
 			try {
-
-				id = obj.CreateAccount(a, d, address, c, b);
+				id = userService.CreateAccount(a, d, address, c, b);
 				RequestDispatcher h = request.getRequestDispatcher("index.jsp");
 				h.forward(request, response);
 

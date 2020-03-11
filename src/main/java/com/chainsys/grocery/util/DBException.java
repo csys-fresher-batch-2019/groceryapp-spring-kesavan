@@ -1,8 +1,13 @@
 package com.chainsys.grocery.util;
 
-public class DBException extends Exception{
+public class DBException extends Exception {
 
-	public DBException(String msg) { 
-	super();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public DBException(String msg, Exception e) {
+		super();
 	}
 }

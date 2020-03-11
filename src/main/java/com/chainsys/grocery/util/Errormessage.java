@@ -1,6 +1,6 @@
 package com.chainsys.grocery.util;
 
-public class Errormessage {
+public class ErrorMessage {
 
 	public static final String VERIFICATION_FAILED
 	="VERIFICATION FAILED DUE TO INVALID CREDENTIALS";

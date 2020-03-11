@@ -1,14 +1,15 @@
 package com.chainsys.grocery.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.AdminProfileDao;
-import com.chainsys.grocery.dao.impl.AdminProfileDaoImpl;
+import com.chainsys.grocery.service.AdminService;
+import com.chainsys.grocery.util.DBException;
 
 @WebServlet("/updatestockserv")
 public class updatestockserv extends HttpServlet {
@@ -18,8 +19,13 @@ public class updatestockserv extends HttpServlet {
 		
 		int id=Integer.parseInt(request.getParameter("pid"));
 		int stock=Integer.parseInt(request.getParameter("stock"));
-		AdminProfileDao obj=new AdminProfileDaoImpl();
-		obj.updateProducts( stock,id);
+		AdminService obj=new AdminService();
+		try {
+			obj.updateProducts( stock,id);
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		response.sendRedirect("adminproviewservlet");
 	}
 

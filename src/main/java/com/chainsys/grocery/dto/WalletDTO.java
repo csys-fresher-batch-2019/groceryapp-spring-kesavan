@@ -1,7 +1,5 @@
 package com.chainsys.grocery.dto;
 
-import java.time.LocalDate;
-
 public class WalletDTO {
 
 	private long mobile;

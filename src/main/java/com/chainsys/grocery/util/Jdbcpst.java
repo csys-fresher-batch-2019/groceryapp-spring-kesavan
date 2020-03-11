@@ -3,29 +3,31 @@ package com.chainsys.grocery.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Jdbcpst {
 
-	public static void preparestmt(String sql, Object... params) throws DBException {
+	public static int preparestmt(String sql, Object... params) throws DBException {
 		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
-
-		try (Connection con = Databaseconnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
+		int rows=0;
+		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			int i = 1;
 			for (Object obj : params) {
 				pst.setObject(i, obj);
 				i++;
 			}
-			pst.executeUpdate();
-		} catch (Exception e) {
-			LOGGER.debug(e);
+			 rows=pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);			
 		}
+		return rows;
 
 	}
 
 	public static boolean exists(String sql, Object... params) {
 		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
 		boolean exists = false;
-		try (Connection con = Databaseconnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			int i = 1;
 			for (Object obj : params) {
 				pst.setObject(i, obj);

@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.chainsys.grocery.dao.impl.AdminProfileDaoImpl;
 import com.chainsys.grocery.model.AdminProfile;
+import com.chainsys.grocery.service.AdminService;
+import com.chainsys.grocery.util.DBException;
 
 @WebServlet("/adminproviewservlet")
 public class adminproviewservlet extends HttpServlet {
@@ -20,9 +21,14 @@ public class adminproviewservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		AdminProfileDaoImpl obj = new AdminProfileDaoImpl();
+		AdminService obj = new AdminService();
 		ArrayList<AdminProfile> view = new ArrayList<AdminProfile>();
-		view = obj.viewProducts();
+		try {
+			view = obj.viewProducts();
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("res", view);
 		RequestDispatcher rd=request.getRequestDispatcher("viewproductsadmin.jsp");
 		rd.forward(request, response);
