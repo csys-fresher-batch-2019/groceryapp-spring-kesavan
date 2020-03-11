@@ -30,7 +30,7 @@ public class adminproviewservlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("res", view);
-		RequestDispatcher rd=request.getRequestDispatcher("viewproductsadmin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("viewproductsadmin.jsp");
 		rd.forward(request, response);
 	}
 

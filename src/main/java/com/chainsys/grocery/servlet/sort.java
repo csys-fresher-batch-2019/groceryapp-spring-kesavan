@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.model.UserDisplay;
 import com.chainsys.grocery.service.UserService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/sort")
 
@@ -32,7 +32,7 @@ public class sort extends HttpServlet {
 				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);
-			} catch (DBException e1) {
+			} catch ( ServiceException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
@@ -44,7 +44,7 @@ public class sort extends HttpServlet {
 				request.setAttribute("listpro", productlist);
 				RequestDispatcher d = request.getRequestDispatcher("products.jsp");
 				d.forward(request, response);
-			} catch (DBException e1) {
+			} catch (ServiceException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

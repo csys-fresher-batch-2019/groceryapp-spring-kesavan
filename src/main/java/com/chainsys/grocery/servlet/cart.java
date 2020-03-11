@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.chainsys.grocery.model.UserProfile;
+
 @WebServlet("/cart")
 
 public class cart extends HttpServlet {
@@ -24,12 +25,12 @@ public class cart extends HttpServlet {
 
 		// Get selected items and store in items variable
 		Map<Integer, Integer> items = getSelectedItems(request);
-		 ArrayList<UserProfile> finalitem = new ArrayList<UserProfile>();
 
 		HttpSession session = request.getSession();
 
 		try {
 			// Get existing items from the card
+			@SuppressWarnings("unchecked")
 			Map<Integer, Integer> cartItemsInSession = (Map<Integer, Integer>) session.getAttribute("CARTS");
 			if (cartItemsInSession == null) {
 				cartItemsInSession = new HashMap<Integer, Integer>();
@@ -45,8 +46,8 @@ public class cart extends HttpServlet {
 			}
 			// System.out.println("No of items in existing cart:" + cartItems.size());
 			session.setAttribute("CARTS", cartItemsInSession);
-			String res="Items added to cart Please check the cart for checkout !!! ";
-			RequestDispatcher d = request.getRequestDispatcher("productlist?res="+res);
+			String res = "Items added to cart Please check the cart for checkout !!! ";
+			RequestDispatcher d = request.getRequestDispatcher("productlist?res=" + res);
 			d.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

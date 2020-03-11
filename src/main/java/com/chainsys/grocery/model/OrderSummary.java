@@ -112,5 +112,4 @@ public class OrderSummary {
 				+ orderstatus + ", payment=" + payment + ", transId=" + transId + "]";
 	}
 
-
 }

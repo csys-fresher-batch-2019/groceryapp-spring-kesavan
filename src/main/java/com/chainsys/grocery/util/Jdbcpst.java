@@ -8,17 +8,17 @@ import java.sql.SQLException;
 public class Jdbcpst {
 
 	public static int preparestmt(String sql, Object... params) throws DBException {
-		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
-		int rows=0;
+		int rows = 0;
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			int i = 1;
 			for (Object obj : params) {
 				pst.setObject(i, obj);
 				i++;
 			}
-			 rows=pst.executeUpdate();
+			rows = pst.executeUpdate();
 		} catch (SQLException e) {
-			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);			
+			e.printStackTrace();
+			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
 		}
 		return rows;
 

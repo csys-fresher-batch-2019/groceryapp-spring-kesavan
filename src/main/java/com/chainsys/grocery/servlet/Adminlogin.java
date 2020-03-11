@@ -13,18 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Adminlogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String a = request.getParameter("Username");
 		String b = request.getParameter("password");
-		if(a.equals("Admin") && b.equals("grocery")) {
+		if (a.equals("Admin") && b.equals("grocery")) {
 			RequestDispatcher d = request.getRequestDispatcher("adminhome.jsp");
 			d.forward(request, response);
-		}else {
+		} else {
 			String result = "Invalid Username / Password";
 			response.sendRedirect("adminindex.jsp?res=" + result);
 
 		}
 	}
 
-	}
+}

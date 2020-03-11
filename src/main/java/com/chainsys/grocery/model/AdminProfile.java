@@ -82,8 +82,6 @@ public class AdminProfile {
 	private int noOfItems;
 	private String products;
 
-	
-
 	public int getNoOfItems() {
 		return noOfItems;
 	}

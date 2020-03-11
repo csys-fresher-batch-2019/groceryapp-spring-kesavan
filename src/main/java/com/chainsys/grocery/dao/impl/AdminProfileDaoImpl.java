@@ -46,7 +46,7 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 
 		UserProfileDao obj = new UserProfileDaoImpl();
 
-		int userId = obj.checkUserId(user);
+		int userId = obj.findUserId(user);
 		LocalDate today = LocalDate.now();
 		System.out.println(today);
 		LocalDate deliveryDate = today.plusDays(3);
@@ -142,7 +142,7 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 		if (a.isEmpty()) {
 			type = a;
 		} else {
-			type = "where payment= '" + a+ "'";
+			type = "where payment= '" + a + "'";
 		}
 		try (Connection con = DatabaseConnection.connect(); Statement stmt = con.createStatement();) {
 			String sql = "select sum(total_amount) as total from orderdata " + type;

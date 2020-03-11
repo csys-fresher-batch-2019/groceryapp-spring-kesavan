@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.service.UserService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/forgotpass")
 
@@ -29,15 +29,14 @@ public class forgotpass extends HttpServlet {
 			try {
 				res1 = obj.checkMailPass(a, username, c);
 				System.out.println(res1);
-			} catch (DBException e1) {
+			} catch (ServiceException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.out.println(res1);
 			if (res1) {
-					String res = "Password retrived successfully Please Login Again !!!";
-					RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat="+res);
-					d.forward(request, response);
+				String res = "Password retrived successfully Please Login Again !!!";
+				RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat=" + res);
+				d.forward(request, response);
 
 			} else {
 				String res = "Invalid MailId";

@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-	public static Connection connect() throws SQLException {
-		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
+	public static Connection connect() throws SQLException, DBException {
 		String user = "", url = "", password = "";
 		Connection conn = null;
 		try {
@@ -24,7 +23,7 @@ public class DatabaseConnection {
 			conn = DriverManager.getConnection(url, user, password);
 
 		} catch (ClassNotFoundException | SQLException e) {
-			LOGGER.debug(e);
+			throw new DBException(ErrorMessage.CONNECTION_FAILED, e);
 		}
 
 		return conn;

@@ -20,6 +20,7 @@ import com.chainsys.grocery.service.AdminService;
 public class placeorder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

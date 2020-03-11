@@ -22,6 +22,7 @@ import com.chainsys.grocery.util.DBException;
 public class paywallet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

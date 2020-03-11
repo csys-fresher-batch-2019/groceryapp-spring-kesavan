@@ -1,7 +1,6 @@
 package com.chainsys.grocery.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.chainsys.grocery.service.UserService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
+
 @WebServlet("/changepass")
 
 public class changepass extends HttpServlet {
@@ -32,8 +32,8 @@ public class changepass extends HttpServlet {
 					boolean res1 = obj.checkMailPass(a, username, c);
 					try {
 						if (res1) {
-							String st="true";
-							RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat="+st);
+							String st = "true";
+							RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat=" + st);
 							d.forward(request, response);
 						}
 					} catch (Exception e) {
@@ -50,12 +50,10 @@ public class changepass extends HttpServlet {
 				RequestDispatcher d = request.getRequestDispatcher("home.jsp?stat=" + res);
 				d.forward(request, response);
 			}
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -2,124 +2,239 @@ package com.chainsys.grocery.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.chainsys.grocery.dao.UserProfileDao;
 import com.chainsys.grocery.dao.impl.UserProfileDaoImpl;
 import com.chainsys.grocery.model.OrderSummary;
 import com.chainsys.grocery.model.UserDisplay;
 import com.chainsys.grocery.model.UserProfile;
 import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ErrorMessage;
+import com.chainsys.grocery.util.ServiceException;
 
 public class UserService {
 	private UserProfileDao obj = new UserProfileDaoImpl();
 
-	public int createAccount(String user, String pass, String address, long mobile, String mail) throws DBException, SQLException {
-		int id=0;
-		return id=obj.createAccount(user, pass, address, mobile, mail);
-	}
-
-	public boolean login(String username, String password) throws DBException, SQLException {
-		boolean status = obj.login(username, password);
-		return status;
-	}
-
-	public void forgotpassword(String mailid, String password) throws DBException {
-		obj.forgotPassword(mailid, password);
-	}
-
-	public ArrayList<UserDisplay> viewProducts(String a) throws DBException {
-		ArrayList<UserDisplay> products = obj.viewProducts(a);
-		return products;
-	}
-
-	public ArrayList<UserProfile> placeOrder(ArrayList<?> o, String username, String payment, int Transactionid) throws DBException, SQLException {
-		ArrayList<UserProfile> order = obj.placeOrder(o, username, payment, Transactionid);
-		return order;
-	}
-
-	public ArrayList<OrderSummary> viewOrder(int userid) throws DBException {
-		ArrayList<OrderSummary> view = obj.viewOrder(userid);
-		return view;
-	}
-
-	/*public void Review(int id, int rating) {
-		obj.Review(id, rating);
-	}*/
-
-	public String cancelOrder(int orderid) throws DBException {
-		String res = obj.cancelOrder(orderid);
-		return res;
-	}
-
-	public String trackorder(int orderid) throws DBException {
-		String track = obj.trackOrder(orderid);
-		return track;
-	}
-
-	public int trackOrderCancel(int orderid) throws DBException {
-		int cancel = obj.trackOrderCancel(orderid);
-		return cancel;
-	}
-
-	public boolean checkUserName(String username) throws DBException {
-		boolean res = obj.checkUsername(username);
-		return res;
-	}
-
-
-	/*public boolean checkproduct(int product) {
-		boolean res = obj.checkproduct(product);
-		return res;
-	}
-
-	public boolean checkstock(int noofitems, int product) {
-		boolean res = obj.checkstock(noofitems, product);
-		return res;
-
-	}*/
-
-	public int checkUserId(String user) throws DBException {
-		int id = obj.checkUserId(user);
+	public int createAccount(String user, String pass, String address, long mobile, String mail)
+			throws ServiceException {
+		int id = 0;
+		try {
+			id = obj.createAccount(user, pass, address, mobile, mail);
+		} catch (SQLException | DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+		}
 		return id;
 	}
 
-	/*public boolean checkorderid(int orderid) {
-		boolean res = obj.checkorderid(orderid);
+	public boolean login(String username, String password) throws ServiceException {
+		boolean status = false;
+		try {
+			status = obj.login(username, password);
+		} catch (DBException | SQLException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+		}
+		return status;
+	}
+
+	public void forgotpassword(String mailid, String password) throws ServiceException {
+		try {
+			obj.forgotPassword(mailid, password);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+	}
+
+	public ArrayList<UserDisplay> viewProducts(String a) throws ServiceException {
+		ArrayList<UserDisplay> products = null;
+		try {
+			products = obj.viewProducts(a);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return products;
+	}
+
+	public ArrayList<UserProfile> placeOrder(ArrayList<?> o, String username, String payment, int Transactionid)
+			throws ServiceException {
+		ArrayList<UserProfile> order = null;
+		try {
+			order = obj.placeOrder(o, username, payment, Transactionid);
+		} catch (DBException | SQLException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return order;
+	}
+
+	public ArrayList<OrderSummary> viewOrder(int userid) throws ServiceException {
+		ArrayList<OrderSummary> view = null;
+		try {
+			view = obj.viewOrder(userid);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return view;
+	}
+
+	/*
+	 * public void Review(int id, int rating) { obj.Review(id, rating); }
+	 */
+
+	public String cancelOrder(int orderid) throws ServiceException {
+		String res = "";
+		try {
+			res = obj.cancelOrder(orderid);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
+	}
 
-	}*/
+	public String trackorder(int orderid) throws ServiceException {
+		String track = "";
+		try {
+			track = obj.trackOrder(orderid);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
 
-	
+		}
+		return track;
+	}
 
-	public boolean checkMailPass(String mail, String user, String pass) throws DBException {
-		boolean res = obj.checkMailPass(mail, user, pass);
+	public int trackOrderCancel(int orderid) throws ServiceException {
+		int cancel = 0;
+		try {
+			cancel = obj.findDaysForCancel(orderid);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return cancel;
+	}
+
+	public boolean checkUserName(String username) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkUsernameForgotPassword(username);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return res;
+	}
+
+	/*
+	 * public boolean checkproduct(int product) { boolean res =
+	 * obj.checkproduct(product); return res; }
+	 * 
+	 * public boolean checkstock(int noofitems, int product) { boolean res =
+	 * obj.checkstock(noofitems, product); return res;
+	 * 
+	 * }
+	 */
+
+	public int checkUserId(String user) throws ServiceException {
+		int id = 0;
+		try {
+			id = obj.findUserId(user);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
+		return id;
+	}
+
+	/*
+	 * public boolean checkorderid(int orderid) { boolean res =
+	 * obj.checkorderid(orderid); return res;
+	 * 
+	 * }
+	 */
+
+	public boolean checkMailPass(String mail, String user, String pass) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkMailPass(mail, user, pass);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
 
 	}
 
-	public void changeAddress(String username, String address) throws DBException {
-		obj.changeAddress(username, address);
+	public void changeAddress(String username, String address) throws ServiceException {
+		try {
+			obj.changeAddress(username, address);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 	}
 
-	public boolean checkMailUser(String mail, String user) throws DBException, SQLException {
-		boolean res = obj.checkMailUser(mail, user);
+	public boolean checkMailUser(String mail, String user) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkMailUser(mail, user);
+		} catch (DBException | SQLException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
 
 	}
 
 	// Acc creation
-	public boolean checkMailCreate(String mail) throws DBException {
-		boolean res = obj.checkMailCreate(mail);
+	public boolean checkMailCreate(String mail) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkMailCreate(mail);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
 	}
 
-	public boolean checkUserNameCreate(String username) throws DBException {
-		boolean res = obj.checkUsernameCreate(username);
+	public boolean checkUserNameCreate(String username) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkUsernameCreate(username);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
 	}
 
-	public boolean checkMobileNoCreate(long mobile) throws DBException {
-		boolean res = obj.checkMobilenoCreate(mobile);
+	public boolean checkMobileNoCreate(long mobile) throws ServiceException {
+		boolean res = false;
+		try {
+			res = obj.checkMobilenoCreate(mobile);
+		} catch (DBException e) {
+			e.printStackTrace();
+			throw new ServiceException(ErrorMessage.SERVICE, e);
+
+		}
 		return res;
 	}
 

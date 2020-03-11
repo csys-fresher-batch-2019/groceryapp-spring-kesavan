@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.service.UserService;
+
 @WebServlet("/cancelorder")
 
 public class cancelorder extends HttpServlet {
@@ -19,7 +20,7 @@ public class cancelorder extends HttpServlet {
 			throws ServletException, IOException {
 
 		int orderid = Integer.parseInt(request.getParameter("order_id"));
-		int transid = Integer.parseInt(request.getParameter("trans_id"));
+		// int transid = Integer.parseInt(request.getParameter("trans_id"));
 
 		String a = request.getParameter("confirm");
 		if (a.equals("yes")) {

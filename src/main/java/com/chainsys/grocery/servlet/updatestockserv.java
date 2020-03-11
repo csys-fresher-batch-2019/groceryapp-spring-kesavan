@@ -14,14 +14,15 @@ import com.chainsys.grocery.util.DBException;
 @WebServlet("/updatestockserv")
 public class updatestockserv extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id=Integer.parseInt(request.getParameter("pid"));
-		int stock=Integer.parseInt(request.getParameter("stock"));
-		AdminService obj=new AdminService();
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int id = Integer.parseInt(request.getParameter("pid"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		AdminService obj = new AdminService();
 		try {
-			obj.updateProducts( stock,id);
+			obj.updateProducts(stock, id);
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

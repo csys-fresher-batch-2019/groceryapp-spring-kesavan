@@ -24,20 +24,17 @@ public interface UserProfileDao {
 
 	ArrayList<OrderSummary> viewOrder(int userid) throws DBException;
 
-	// void Review(int id, int rating);
-	
-	public void updateStatus() throws DBException ;
-
+	public void updateStatus() throws DBException;
 
 	String cancelOrder(int orderid) throws DBException;
 
 	String trackOrder(int orderid) throws DBException;
 
-	int trackOrderCancel(int orderid) throws DBException;
+	int findDaysForCancel(int orderid) throws DBException;
 
-	boolean checkUsername(String username) throws DBException;
+	boolean checkUsernameForgotPassword(String username) throws DBException;
 
-	int checkUserId(String user) throws DBException;
+	int findUserId(String user) throws DBException;
 
 	boolean checkMailPass(String mail, String user, String pass) throws DBException;
 
@@ -51,4 +48,7 @@ public interface UserProfileDao {
 	boolean checkUsernameCreate(String username) throws DBException;
 
 	boolean checkMobilenoCreate(long mobile) throws DBException;
+	
+	// void Review(int id, int rating);
+
 }

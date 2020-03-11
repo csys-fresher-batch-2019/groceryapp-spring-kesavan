@@ -1,5 +1,5 @@
 package com.chainsys.grocery.dto;
-
+@SuppressWarnings("unused")
 public class WalletDTO {
 
 	private long mobile;

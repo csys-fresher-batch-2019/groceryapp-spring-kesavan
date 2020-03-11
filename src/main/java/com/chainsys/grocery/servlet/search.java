@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.model.UserDisplay;
 import com.chainsys.grocery.service.UserService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
+
 @WebServlet("/search")
 
 public class search extends HttpServlet {
@@ -31,7 +32,7 @@ public class search extends HttpServlet {
 			ArrayList<UserDisplay> list = null;
 			try {
 				list = obj.viewProducts(b);
-			} catch (DBException e1) {
+			} catch (ServiceException e1) {
 				e1.printStackTrace();
 			}
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.model.UserDisplay;
 import com.chainsys.grocery.service.UserService;
+
 @WebServlet("/productlist")
 
 public class productlist extends HttpServlet {

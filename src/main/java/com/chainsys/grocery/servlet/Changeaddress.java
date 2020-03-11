@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.chainsys.grocery.service.UserService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
+
 @WebServlet("/Changeaddress")
 
 public class Changeaddress extends HttpServlet {
@@ -21,17 +22,18 @@ public class Changeaddress extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("LOG IN USER");
-		String address=request.getParameter("address");
-		String pin=request.getParameter("pincode");
-		String address1=address+"-"+pin;
-		UserService obj=new UserService();
+		String address = request.getParameter("address");
+		String pin = request.getParameter("pincode");
+		String address1 = address + "-" + pin;
+		UserService obj = new UserService();
+
 		try {
 			obj.changeAddress(username, address1);
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		String status="Address Updated Successfully";
-		response.sendRedirect("home.jsp?result="+status);
+
+		String status = "Address Updated Successfully";
+		response.sendRedirect("home.jsp?result=" + status);
 	}
 }

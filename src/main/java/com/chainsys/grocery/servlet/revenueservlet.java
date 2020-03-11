@@ -20,17 +20,17 @@ public class revenueservlet extends HttpServlet {
 			throws ServletException, IOException {
 		AdminService obj = new AdminService();
 		String a = request.getParameter("val");
-			int total=0;
-			try {
-				total = obj.revenue(a);
-			} catch (DBException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String b = Integer.toString(total);
-			request.setAttribute("res", b);
-			request.setAttribute("type", a);
-		
+		int total = 0;
+		try {
+			total = obj.revenue(a);
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String b = Integer.toString(total);
+		request.setAttribute("res", b);
+		request.setAttribute("type", a);
+
 		RequestDispatcher d = request.getRequestDispatcher("totalrevenue.jsp");
 		d.forward(request, response);
 	}

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.chainsys.grocery.dao.AdminProfileDao;
 import com.chainsys.grocery.dao.impl.AdminProfileDaoImpl;
@@ -19,11 +18,12 @@ import com.chainsys.grocery.util.DBException;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api")
+@SuppressWarnings("unused")
+
 public class ProductController {
 
 	AdminProfileDao obj = new AdminProfileDaoImpl();
 
-	
 	@PostMapping("/addproduct")
 	public void addProduct(@RequestParam("pname") String pname, @RequestParam("pid") Integer pid,
 			@RequestParam("company") String company, @RequestParam("quantity") Float quantity,
@@ -42,7 +42,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/addproduct1")
-	public void addProduct1(@RequestBody AdminProfile addproducts) throws DBException {
+	public void addProduct1(@RequestBody AdminProfile addproducts, @RequestParam("pname") String pname,
+			@RequestParam("pid") Integer pid) throws DBException {
 		AdminProfile[] p = { addproducts };
 		int a = obj.addProducts(p);
 	}
@@ -53,7 +54,8 @@ public class ProductController {
 	}
 
 	@PostMapping("/updateproducts")
-	public void updateProducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock) throws DBException {
+	public void updateProducts(@RequestParam("pid") Integer pid, @RequestParam("stock") Integer stock)
+			throws DBException {
 		obj.updateProducts(stock, pid);
 	}
 

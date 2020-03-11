@@ -6,8 +6,6 @@ public class UserProfile {
 	private int productid;
 	private int noOfItems;
 
-	
-
 	public UserProfile() {
 	}
 
