@@ -32,10 +32,10 @@ public class UserController {
 		return res;
 	}
 
-	@GetMapping("/forgotpassword")
+	@PostMapping("/changepassword")
 	public int forgotpassword(@RequestParam("mailid") String mailid, @RequestParam("password") String password)
 			throws DBException {
-		return obj.forgotPassword(mailid, password);
+		return obj.changePassword(mailid, password);
 	}
 
 	@GetMapping("/viewproducts")
@@ -65,7 +65,7 @@ public class UserController {
 		return obj.cancelOrder(orderid);
 	}
 
-	@PostMapping("/trackorder")
+	@GetMapping("/trackorder")
 	public String trackOrder(@RequestParam("orderid") int orderid) throws DBException {
 		return obj.trackOrder(orderid);
 	}
@@ -80,11 +80,42 @@ public class UserController {
 		return obj.checkUsernameForgotPassword(username);
 	}
 
-	@GetMapping("/checkuserid")
+	@GetMapping("/displayuserid")
+	public int findUserId(String user) throws DBException {
+		return obj.findUserId(user);
+	}
 
-	public int checkUserId(String user) throws DBException {
-		return 0;
+	@GetMapping("/forgotpassword")
+	public boolean checkMailPass(String mail, String user, String pass) throws DBException {
+		return obj.forgotPassword(mail, user, pass);
+	}
 
+	@PostMapping("/changeaddress")
+	public void changeAddress(String username, String address) throws DBException {
+		obj.changeAddress(username, address);
+	}
+
+	@GetMapping("/checkuser") // WHILE USER NOT LOGGED IN
+	public boolean checkMailUser(String mail, String user) throws DBException, SQLException {
+		return obj.checkMailUser(mail, user);
+	}
+
+	// FOR ACC CREATION
+
+	@GetMapping("/checkmailAccCeation")
+	public boolean checkMailCreate(String mail) throws DBException {
+		return obj.checkMailCreate(mail);
+	}
+
+	@GetMapping("/checkuserAccCreation")
+	public boolean checkUsernameCreate(String username) throws DBException {
+		return obj.checkUsernameCreate(username);
+
+	}
+
+	@GetMapping("/checkmobileAccCreation")
+	public boolean checkMobilenoCreate(long mobile) throws DBException {
+		return obj.checkMobilenoCreate(mobile);
 	}
 
 }

@@ -39,7 +39,7 @@ public class UserService {
 
 	public void forgotpassword(String mailid, String password) throws ServiceException {
 		try {
-			obj.forgotPassword(mailid, password);
+			obj.changePassword(mailid, password);
 		} catch (DBException e) {
 			e.printStackTrace();
 			throw new ServiceException(ErrorMessage.SERVICE, e);
@@ -168,7 +168,7 @@ public class UserService {
 	public boolean checkMailPass(String mail, String user, String pass) throws ServiceException {
 		boolean res = false;
 		try {
-			res = obj.checkMailPass(mail, user, pass);
+			res = obj.forgotPassword(mail, user, pass);
 		} catch (DBException e) {
 			e.printStackTrace();
 			throw new ServiceException(ErrorMessage.SERVICE, e);

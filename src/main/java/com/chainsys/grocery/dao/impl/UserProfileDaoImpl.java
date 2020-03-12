@@ -256,7 +256,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	 */
 
 	// CHANGE PASSWORD
-	public int forgotPassword(String mail, String pass) throws DBException {
+	public int changePassword(String mail, String pass) throws DBException {
 		int rows = Jdbcpst.preparestmt("update usersdata set password = ? where mail_id=?", pass, mail);
 		return rows;
 	}
@@ -367,8 +367,8 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return days;
 	}
 
-	// CHANGE MAIL ID FOR CHANGE PASSWORD
-	public boolean checkMailPass(String mail, String user, String pass) throws DBException {
+	// CHECK MAIL ID FOR CHANGE PASSWORD
+	public boolean forgotPassword(String mail, String user, String pass) throws DBException {
 		boolean res = false;
 		int rows = 0;
 		String sql = "select mail_id from usersdata where user_name=?";
@@ -378,7 +378,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 				if (rs.next()) {
 					String mail1 = rs.getString("mail_id");
 					if (mail.equals(mail1)) {
-						rows = forgotPassword(mail, pass);
+						rows = changePassword(mail, pass);
 					} else {
 						LOGGER.error(ErrorMessage.VERIFICATION_FAILED);
 					}
