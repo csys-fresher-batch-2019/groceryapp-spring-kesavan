@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.model.AdminProfile;
 import com.chainsys.grocery.service.AdminService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/addpro")
 
@@ -33,7 +33,7 @@ public class addpro extends HttpServlet {
 		int a = 0;
 		try {
 			a = as.addProducts(p);
-		} catch (DBException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

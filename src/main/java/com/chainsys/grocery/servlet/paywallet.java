@@ -1,7 +1,6 @@
 package com.chainsys.grocery.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.chainsys.grocery.model.UserProfile;
 import com.chainsys.grocery.payment.WalletAPI;
 import com.chainsys.grocery.service.AdminService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/paywallet")
 
@@ -42,7 +41,7 @@ public class paywallet extends HttpServlet {
 			int id=(int) result.get("transactionId");
 			try {
 				obj1.createOrder(items, username, "CITIWALLET", id);
-			} catch (DBException | SQLException e) {
+			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
 			items.clear();

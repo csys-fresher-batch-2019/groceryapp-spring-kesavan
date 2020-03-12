@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.model.AdminProfile;
 import com.chainsys.grocery.service.AdminService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/adminproviewservlet")
 public class adminproviewservlet extends HttpServlet {
@@ -25,7 +25,7 @@ public class adminproviewservlet extends HttpServlet {
 		ArrayList<AdminProfile> view = new ArrayList<AdminProfile>();
 		try {
 			view = obj.viewProducts();
-		} catch (DBException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

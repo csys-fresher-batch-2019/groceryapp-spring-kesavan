@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.service.AdminService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/updatestockserv")
 public class updatestockserv extends HttpServlet {
@@ -23,7 +23,7 @@ public class updatestockserv extends HttpServlet {
 		AdminService obj = new AdminService();
 		try {
 			obj.updateProducts(stock, id);
-		} catch (DBException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

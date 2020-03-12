@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.chainsys.grocery.service.AdminService;
-import com.chainsys.grocery.util.DBException;
+import com.chainsys.grocery.util.ServiceException;
 
 @WebServlet("/revenueservlet")
 public class revenueservlet extends HttpServlet {
@@ -23,7 +23,7 @@ public class revenueservlet extends HttpServlet {
 		int total = 0;
 		try {
 			total = obj.revenue(a);
-		} catch (DBException e) {
+		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
