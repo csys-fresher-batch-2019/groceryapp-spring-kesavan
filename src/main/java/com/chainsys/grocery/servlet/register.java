@@ -38,22 +38,13 @@ public class register extends HttpServlet {
 			mail = userService.checkMailCreate(b);
 			user = userService.checkUserNameCreate(a);
 		} catch (ServiceException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-
 		System.out.println("mobile" + mobile);
 		System.out.println("mail" + mail);
 		System.out.println("user" + user);
 		if (user || mail || mobile) {
-
-			try {
-				r = "fail";
-				userService.createAccount(a, d, address, c, b);
-			} catch (ServiceException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			r = "fail";
 			RequestDispatcher h = request.getRequestDispatcher("Register.jsp?status=" + r);
 			h.forward(request, response);
 

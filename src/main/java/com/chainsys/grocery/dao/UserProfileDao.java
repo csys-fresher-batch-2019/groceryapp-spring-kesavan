@@ -24,7 +24,7 @@ public interface UserProfileDao {
 
 	ArrayList<OrderSummary> viewOrder(int userid) throws DBException;
 
-	public void updateStatus() throws DBException;
+	void updateStatus() throws DBException;
 
 	String cancelOrder(int orderid) throws DBException;
 
@@ -32,23 +32,18 @@ public interface UserProfileDao {
 
 	int findDaysForCancel(int orderid) throws DBException;
 
-	boolean checkUsernameForgotPassword(String username) throws DBException;
-
 	int findUserId(String user) throws DBException;
-
-	boolean forgotPassword(String mail, String user, String pass) throws DBException;
 
 	void changeAddress(String username, String address) throws DBException;
 
-	boolean checkMailUser(String mail, String user) throws DBException, SQLException;
+	boolean userValidation(String mail, String user, String pass) throws DBException;
 
-	// Acc creation validation
+	// Account creation validation
+
 	boolean checkMailCreate(String mail) throws DBException;
 
 	boolean checkUsernameCreate(String username) throws DBException;
 
 	boolean checkMobilenoCreate(long mobile) throws DBException;
-	
-	// void Review(int id, int rating);
 
 }

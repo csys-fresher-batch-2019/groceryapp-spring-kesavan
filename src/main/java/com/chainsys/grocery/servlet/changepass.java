@@ -21,33 +21,26 @@ public class changepass extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("LOG IN USER");
-		String a = request.getParameter("mail");
-		String b = request.getParameter("npassword");
-		String c = request.getParameter("cpassword");
+		String user = (String) session.getAttribute("LOG IN USER");
+		String mail = request.getParameter("mail");
+		String pass = request.getParameter("npassword");
+		String pass1 = request.getParameter("cpassword");
 		UserService obj = new UserService();
 		try {
-			if (obj.checkMailUser(a, username)) {
-				if (b.equals(c)) {
-					boolean res1 = obj.checkMailPass(a, username, c);
-					try {
-						if (res1) {
-							String st = "true";
-							RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat=" + st);
-							d.forward(request, response);
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			if (pass.equals(pass1)) {
+				if (obj.userValidation(mail, user, pass)) {
+					String st = "true";
+					RequestDispatcher d = request.getRequestDispatcher("index.jsp?stat=" + st);
+					d.forward(request, response);
 
 				} else {
-					String res1 = "Password Mismatch";
-					RequestDispatcher d = request.getRequestDispatcher("changepass.jsp?res=" + res1);
+					String res = "Invalid MailId ";
+					RequestDispatcher d = request.getRequestDispatcher("home.jsp?stat=" + res);
 					d.forward(request, response);
 				}
 			} else {
-				String res = "Invalid MailId ";
-				RequestDispatcher d = request.getRequestDispatcher("home.jsp?stat=" + res);
+				String res1 = "Password Mismatch";
+				RequestDispatcher d = request.getRequestDispatcher("changepass.jsp?res=" + res1);
 				d.forward(request, response);
 			}
 		} catch (ServiceException e) {

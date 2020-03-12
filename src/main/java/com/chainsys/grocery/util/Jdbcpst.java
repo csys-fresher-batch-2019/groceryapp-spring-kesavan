@@ -24,8 +24,7 @@ public class Jdbcpst {
 
 	}
 
-	public static boolean exists(String sql, Object... params) {
-		LoggerGrocery LOGGER = LoggerGrocery.getInstance();
+	public static boolean exists(String sql, Object... params) throws DBException {
 		boolean exists = false;
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
 			int i = 1;
@@ -39,8 +38,9 @@ public class Jdbcpst {
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.debug(e);
-		}
+			e.printStackTrace();
+			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
+				}
 		return exists;
 
 	}

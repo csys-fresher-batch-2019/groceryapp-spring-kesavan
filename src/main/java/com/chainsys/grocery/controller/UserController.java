@@ -25,11 +25,18 @@ import com.chainsys.grocery.util.DBException;
 public class UserController {
 	UserProfileDao obj = new UserProfileDaoImpl();
 
+	@PostMapping("/register")
+	int createAccount(@RequestParam("username") String user, @RequestParam("Password") String pass,
+			@RequestParam("address") String address, @RequestParam("mobile") long mobile,
+			@RequestParam("mailId") String mail) throws SQLException, DBException {
+		return obj.createAccount(user, pass, address, mobile, mail);
+
+	}
+
 	@GetMapping("/login")
 	public boolean login(@RequestParam("username") String user, @RequestParam("password") String pass)
 			throws DBException, SQLException {
-		boolean res = obj.login(user, pass);
-		return res;
+		return obj.login(user, pass);
 	}
 
 	@PostMapping("/changepassword")
@@ -75,19 +82,9 @@ public class UserController {
 		return obj.findDaysForCancel(orderid);
 	}
 
-	@GetMapping("/checkuserforgotpassword")
-	public boolean checkuserforgotpassword(@RequestParam("username") String username) throws DBException {
-		return obj.checkUsernameForgotPassword(username);
-	}
-
 	@GetMapping("/displayuserid")
 	public int findUserId(String user) throws DBException {
 		return obj.findUserId(user);
-	}
-
-	@GetMapping("/forgotpassword")
-	public boolean checkMailPass(String mail, String user, String pass) throws DBException {
-		return obj.forgotPassword(mail, user, pass);
 	}
 
 	@PostMapping("/changeaddress")
@@ -95,9 +92,9 @@ public class UserController {
 		obj.changeAddress(username, address);
 	}
 
-	@GetMapping("/checkuser") // WHILE USER NOT LOGGED IN
-	public boolean checkMailUser(String mail, String user) throws DBException, SQLException {
-		return obj.checkMailUser(mail, user);
+	@GetMapping("/uservalidation") // FOR FORGOT OR CHANGE PASSWORD
+	public boolean userValidation(String mail, String user, String pass) throws DBException {
+		return false;
 	}
 
 	// FOR ACC CREATION

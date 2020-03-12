@@ -84,9 +84,6 @@ public class UserService {
 		return view;
 	}
 
-	/*
-	 * public void Review(int id, int rating) { obj.Review(id, rating); }
-	 */
 
 	public String cancelOrder(int orderid) throws ServiceException {
 		String res = "";
@@ -124,27 +121,6 @@ public class UserService {
 		return cancel;
 	}
 
-	public boolean checkUserName(String username) throws ServiceException {
-		boolean res = false;
-		try {
-			res = obj.checkUsernameForgotPassword(username);
-		} catch (DBException e) {
-			e.printStackTrace();
-			throw new ServiceException(ErrorMessage.SERVICE, e);
-
-		}
-		return res;
-	}
-
-	/*
-	 * public boolean checkproduct(int product) { boolean res =
-	 * obj.checkproduct(product); return res; }
-	 * 
-	 * public boolean checkstock(int noofitems, int product) { boolean res =
-	 * obj.checkstock(noofitems, product); return res;
-	 * 
-	 * }
-	 */
 
 	public int checkUserId(String user) throws ServiceException {
 		int id = 0;
@@ -158,26 +134,6 @@ public class UserService {
 		return id;
 	}
 
-	/*
-	 * public boolean checkorderid(int orderid) { boolean res =
-	 * obj.checkorderid(orderid); return res;
-	 * 
-	 * }
-	 */
-
-	public boolean checkMailPass(String mail, String user, String pass) throws ServiceException {
-		boolean res = false;
-		try {
-			res = obj.forgotPassword(mail, user, pass);
-		} catch (DBException e) {
-			e.printStackTrace();
-			throw new ServiceException(ErrorMessage.SERVICE, e);
-
-		}
-		return res;
-
-	}
-
 	public void changeAddress(String username, String address) throws ServiceException {
 		try {
 			obj.changeAddress(username, address);
@@ -188,17 +144,14 @@ public class UserService {
 		}
 	}
 
-	public boolean checkMailUser(String mail, String user) throws ServiceException {
+	public boolean userValidation(String mail, String user, String pass) throws ServiceException {
 		boolean res = false;
 		try {
-			res = obj.checkMailUser(mail, user);
-		} catch (DBException | SQLException e) {
+			res = obj.userValidation(mail, user, pass);
+		} catch (DBException e) {
 			e.printStackTrace();
-			throw new ServiceException(ErrorMessage.SERVICE, e);
-
 		}
 		return res;
-
 	}
 
 	// Acc creation

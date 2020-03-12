@@ -107,13 +107,13 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	// VIEW ORDERSUMMARY
 	public ArrayList<OrderSummary> viewOrder(int userid) throws DBException {
 		ArrayList<OrderSummary> productsview = new ArrayList<>();
+		LocalDate today = LocalDate.now();
+		updateOrderStatusDelivered(today);
 		String sql = "select order_id,product_name,manufacturer,no_of_items,price_per_item,total_amount,"
 				+ "order_date,delivery_date,delivery_address,order_status,payment,transaction_id  from orderdata o "
 				+ " inner join products p on p.product_id=o.product_id and user_id= ? "
 				+ " inner join usersdata u on u.user_id= ? order by o.order_date desc";
 		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
-			LocalDate today = LocalDate.now();
-			updateOrderStatusDelivered(today);
 			pst.setInt(1, userid);
 			pst.setInt(2, userid);
 			try (ResultSet rs = pst.executeQuery();) {
@@ -230,31 +230,6 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return s;
 	}
 
-	// UNUSED CODE
-	// ADD REVIEW
-	/*
-	 * public void Review(int orderid, int rating) { try (Connection con =
-	 * Databaseconnection.connect(); Statement stmt = con.createStatement();) {
-	 * String sql4 = "select product_id from orderdata where order_id=" + orderid;
-	 * try (ResultSet rs1 = stmt.executeQuery(sql4);) { rs1.next(); int productId =
-	 * rs1.getInt("product_id"); Jdbcpst.
-	 * preparestmt("insert into review(order_id,product_id,rating)values(?,?,?)",
-	 * orderid, productId, rating); String sql1 =
-	 * "select avg(rating) as avrg from review where product_id=" + productId; try
-	 * (ResultSet rs = stmt.executeQuery(sql1);) { rs.next(); float avg =
-	 * rs.getFloat("avrg"); if (avg >= 4) { Jdbcpst.
-	 * preparestmt("update proreview set review='Good',rating=? where product_id=?",
-	 * avg, productId); } else if (avg >= 3 && avg < 4) { Jdbcpst.
-	 * preparestmt("update proreview set review='Better',rating=? where product_id=?"
-	 * , avg, productId); } else { Jdbcpst.
-	 * preparestmt("update proreview set review='Bad',rating=? where product_id=?",
-	 * avg, productId); }
-	 * 
-	 * } catch (Exception e) { LOGGER.error(Errormessage.INVALID_COLUMN_INDEX); } }
-	 * catch (Exception e) { LOGGER.error(Errormessage.INVALID_COLUMN_INDEX); } }
-	 * catch (Exception e) { LOGGER.error(Errormessage.CONNECTION_FAILED); } }
-	 */
-
 	// CHANGE PASSWORD
 	public int changePassword(String mail, String pass) throws DBException {
 		int rows = Jdbcpst.preparestmt("update usersdata set password = ? where mail_id=?", pass, mail);
@@ -270,18 +245,6 @@ public class UserProfileDaoImpl implements UserProfileDao {
 			e.printStackTrace();
 			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
 		}
-	}
-
-	// USERNAME CHECK FOR FORGOT PASSWORD
-	public boolean checkUsernameForgotPassword(String username) throws DBException {
-		boolean res = false;
-		String sql = "select user_name from usersdata where user_name=?";
-		int rows = Jdbcpst.preparestmt(sql, username);
-		if (rows != 0) {
-			res = true;
-		}
-		return res;
-
 	}
 
 	// DISPLAY USERID
@@ -307,10 +270,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	public boolean checkMailCreate(String mail) throws DBException {
 		boolean res = false;
 		String sql = "select mail_id from usersdata where mail_id=?";
-		int rows = Jdbcpst.preparestmt(sql, mail);
-		if (rows != 0) {
-			res = true;
-		}
+		res = Jdbcpst.exists(sql, mail);
 		return res;
 	}
 
@@ -318,10 +278,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	public boolean checkUsernameCreate(String username) throws DBException {
 		boolean res = false;
 		String sql = "select user_name from usersdata where user_name=?";
-		int rows = Jdbcpst.preparestmt(sql, username);
-		if (rows != 0) {
-			res = true;
-		}
+		res = Jdbcpst.exists(sql, username);
 		return res;
 	}
 
@@ -329,21 +286,9 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	public boolean checkMobilenoCreate(long mobile) throws DBException {
 		boolean res = false;
 		String sql = "select phone_no from usersdata where phone_no=?";
-		int rows = Jdbcpst.preparestmt(sql, mobile);
-		if (rows != 0) {
-			res = true;
-		}
+		res = Jdbcpst.exists(sql, mobile);
 		return res;
 	}
-	// unused code
-	/*
-	 * // CHECK FOR RATING IF ALREADY REVIEWED public boolean checkrating(int id) {
-	 * boolean res = false; try (Connection con = DatabaseConnection.connect();
-	 * Statement stmt = con.createStatement();) { if
-	 * (stmt.executeUpdate("select order_id from review where order_id=" + id) == 0)
-	 * { res = true; } } catch (Exception e) { e.printStackTrace();
-	 * LOGGER.error(ErrorMessage.INVALID_COLUMN_INDEX); } return res; }
-	 */
 
 	// TRACK ORDER FOR CANCEL
 	public int findDaysForCancel(int orderid) throws DBException {
@@ -367,8 +312,8 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return days;
 	}
 
-	// CHECK MAIL ID FOR CHANGE PASSWORD
-	public boolean forgotPassword(String mail, String user, String pass) throws DBException {
+	// CHANGE PASSWORD / FORGOT PASSWORD
+	public boolean userValidation(String mail, String user, String pass) throws DBException {
 		boolean res = false;
 		int rows = 0;
 		String sql = "select mail_id from usersdata where user_name=?";
@@ -395,28 +340,39 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	// CHECK MAIL FOR CORRESSPONDING USER WHILE USER NOT LOGGED IN [ FORGOT
-	// PASSWORD]
-	public boolean checkMailUser(String mail, String user) throws DBException, SQLException {
-		boolean res = false;
-		String sql = "select mail_id from usersdata where user_name=?";
-		try (Connection con = DatabaseConnection.connect(); PreparedStatement pst = con.prepareStatement(sql);) {
-			pst.setString(1, user);
-			try (ResultSet rs = pst.executeQuery();) {
-				if (rs.next()) {
-					String maildb = rs.getString("mail_id");
-					if (mail.equals(maildb)) {
-						res = true;
-					} else {
-						LOGGER.error(ErrorMessage.VERIFICATION_FAILED);
-					}
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
-			}
-			return res;
-		}
-
-	}
 }
+
+// UNUSED CODE
+// ADD REVIEW
+/*
+ * public void Review(int orderid, int rating) { try (Connection con =
+ * Databaseconnection.connect(); Statement stmt = con.createStatement();) {
+ * String sql4 = "select product_id from orderdata where order_id=" + orderid;
+ * try (ResultSet rs1 = stmt.executeQuery(sql4);) { rs1.next(); int productId =
+ * rs1.getInt("product_id"); Jdbcpst.
+ * preparestmt("insert into review(order_id,product_id,rating)values(?,?,?)",
+ * orderid, productId, rating); String sql1 =
+ * "select avg(rating) as avrg from review where product_id=" + productId; try
+ * (ResultSet rs = stmt.executeQuery(sql1);) { rs.next(); float avg =
+ * rs.getFloat("avrg"); if (avg >= 4) { Jdbcpst.
+ * preparestmt("update proreview set review='Good',rating=? where product_id=?",
+ * avg, productId); } else if (avg >= 3 && avg < 4) { Jdbcpst.
+ * preparestmt("update proreview set review='Better',rating=? where product_id=?"
+ * , avg, productId); } else { Jdbcpst.
+ * preparestmt("update proreview set review='Bad',rating=? where product_id=?",
+ * avg, productId); }
+ * 
+ * } catch (Exception e) { LOGGER.error(Errormessage.INVALID_COLUMN_INDEX); } }
+ * catch (Exception e) { LOGGER.error(Errormessage.INVALID_COLUMN_INDEX); } }
+ * catch (Exception e) { LOGGER.error(Errormessage.CONNECTION_FAILED); } }
+ */
+
+// unused code
+/*
+ * // CHECK FOR RATING IF ALREADY REVIEWED public boolean checkrating(int id) {
+ * boolean res = false; try (Connection con = DatabaseConnection.connect();
+ * Statement stmt = con.createStatement();) { if
+ * (stmt.executeUpdate("select order_id from review where order_id=" + id) == 0)
+ * { res = true; } } catch (Exception e) { e.printStackTrace();
+ * LOGGER.error(ErrorMessage.INVALID_COLUMN_INDEX); } return res; }
+ */
