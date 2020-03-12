@@ -13,11 +13,11 @@ public class OrderSummary {
 	}
 
 	public String getProductname() {
-		return productname;
+		return productName;
 	}
 
 	public void setProductname(String productname) {
-		this.productname = productname;
+		this.productName = productname;
 	}
 
 	public String getManufacturer() {
@@ -29,51 +29,51 @@ public class OrderSummary {
 	}
 
 	public int getNoofitems() {
-		return noofitems;
+		return noOfItems;
 	}
 
 	public void setNoofitems(int noofitems) {
-		this.noofitems = noofitems;
+		this.noOfItems = noofitems;
 	}
 
 	public int getTotalamount() {
-		return totalamount;
+		return totalAmount;
 	}
 
 	public void setTotalamount(int totalamount) {
-		this.totalamount = totalamount;
+		this.totalAmount = totalamount;
 	}
 
 	public Date getOrderdate() {
-		return orderdate;
+		return orderDate;
 	}
 
 	public void setOrderdate(Date orderdate) {
-		this.orderdate = orderdate;
+		this.orderDate = orderdate;
 	}
 
 	public Date getDeliverydate() {
-		return deliverydate;
+		return deliveryDate;
 	}
 
 	public void setDeliverydate(Date deliverydate) {
-		this.deliverydate = deliverydate;
+		this.deliveryDate = deliverydate;
 	}
 
 	public String getDeliveryaddress() {
-		return deliveryaddress;
+		return deliveryAddress;
 	}
 
 	public void setDeliveryaddress(String deliveryaddress) {
-		this.deliveryaddress = deliveryaddress;
+		this.deliveryAddress = deliveryaddress;
 	}
 
 	public String getOrderstatus() {
-		return orderstatus;
+		return orderStatus;
 	}
 
 	public void setOrderstatus(String orderstatus) {
-		this.orderstatus = orderstatus;
+		this.orderStatus = orderstatus;
 	}
 
 	public String getPayment() {
@@ -85,14 +85,14 @@ public class OrderSummary {
 	}
 
 	private int orderid;
-	private String productname;
+	private String productName;
 	private String manufacturer;
-	private int noofitems;
-	private int totalamount;
-	private Date orderdate;
-	private Date deliverydate;
-	private String deliveryaddress;
-	private String orderstatus;
+	private int noOfItems;
+	private int totalAmount;
+	private Date orderDate;
+	private Date deliveryDate;
+	private String deliveryAddress;
+	private String orderStatus;
 	private String payment;
 	private int transId;
 
@@ -106,10 +106,10 @@ public class OrderSummary {
 
 	@Override
 	public String toString() {
-		return "Ordersummary [orderid=" + orderid + ", productname=" + productname + ", manufacturer=" + manufacturer
-				+ ", noofitems=" + noofitems + ", totalamount=" + totalamount + ", orderdate=" + orderdate
-				+ ", deliverydate=" + deliverydate + ", deliveryaddress=" + deliveryaddress + ", orderstatus="
-				+ orderstatus + ", payment=" + payment + ", transId=" + transId + "]";
+		return "Ordersummary [orderid=" + orderid + ", productname=" + productName + ", manufacturer=" + manufacturer
+				+ ", noofitems=" + noOfItems + ", totalamount=" + totalAmount + ", orderdate=" + orderDate
+				+ ", deliverydate=" + deliveryDate + ", deliveryaddress=" + deliveryAddress + ", orderstatus="
+				+ orderStatus + ", payment=" + payment + ", transId=" + transId + "]";
 	}
 
 }

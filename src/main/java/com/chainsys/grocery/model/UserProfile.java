@@ -3,18 +3,18 @@ package com.chainsys.grocery.model;
 public class UserProfile {
 
 	// ORDER DETAILS
-	private int productid;
+	private int productId;
 	private int noOfItems;
 
 	public UserProfile() {
 	}
 
 	public int getProductid() {
-		return productid;
+		return productId;
 	}
 
 	public void setProductid(int productid) {
-		this.productid = productid;
+		this.productId = productid;
 	}
 
 	public int getNoOfItems() {
@@ -26,7 +26,7 @@ public class UserProfile {
 	}
 
 	public String toString() {
-		return "UserProfile [productid=" + productid + ", noOfItems=" + noOfItems + "]";
+		return "UserProfile [productid=" + productId + ", noOfItems=" + noOfItems + "]";
 	}
 
 }
