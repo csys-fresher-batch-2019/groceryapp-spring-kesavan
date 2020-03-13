@@ -18,7 +18,7 @@ public class Jdbcpst {
 			rows = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
+			//throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
 		}
 		return rows;
 

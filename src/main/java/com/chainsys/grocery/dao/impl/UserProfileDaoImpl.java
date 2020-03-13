@@ -29,15 +29,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 	// CREATE ACCOUNT
 	public int createAccount(String user, String pass, String address, long mobile, String mail) throws DBException {
 		int rows = 0;
-		try (Connection con = DatabaseConnection.connect();) {
-			String sql = "insert into usersdata(user_name,delivery_address,password,phone_no,mail_id) "
-					+ "values(?,?,?,?,?)";
-			// rows = jdbcTemplate.update(sql, user, address, pass, mobile, mail);
-			rows = Jdbcpst.preparestmt(sql, user, address, pass, mobile, mail);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBException(ErrorMessage.INVALID_COLUMN_INDEX, e);
-		}
+		String sql = "insert into usersdata(user_name,delivery_address,password,phone_no,mail_id) "
+				+ "values(?,?,?,?,?)";
+		// rows = jdbcTemplate.update(sql, user, address, pass, mobile, mail);
+		rows = Jdbcpst.preparestmt(sql, user, address, pass, mobile, mail);
 		return rows;
 
 	}
