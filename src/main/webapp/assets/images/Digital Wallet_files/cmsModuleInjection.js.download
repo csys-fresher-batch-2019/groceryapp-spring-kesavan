@@ -1,8 +1,0 @@
-﻿$(document).ready(function () {
-    $("span[id^='span_grid_stack_module_']").trigger('click');
-});
-function AppendDWModule(divSourceModuleContainerId) {
-    $(divSourceModuleContainerId).empty();
-    $("#divModuleContainer").css("display","block");
-    $("#divModuleContainer").detach().appendTo(divSourceModuleContainerId);
-}
