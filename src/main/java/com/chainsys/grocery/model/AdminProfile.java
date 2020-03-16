@@ -98,9 +98,6 @@ public class AdminProfile {
 		this.products = products;
 	}
 
-	public AdminProfile() {
-	}
-
 	public String toString() {
 		return "AdminProfile [productName=" + productName + ", productId=" + productId + ", manufacturer="
 				+ manufacturer + ", quantity=" + quantity + ", unit=" + unit + ", priceRS=" + priceRS + ", stock="
