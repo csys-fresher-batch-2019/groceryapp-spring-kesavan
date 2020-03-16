@@ -23,7 +23,10 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 	LoggerGrocery LOGGER = LoggerGrocery.getInstance();
 	UserProfileDao ob = new UserProfileDaoImpl();
 
-	public int addProducts(AdminProfile[] p) throws DBException {
+	public int addProducts(AdminProfile[] p) throws DBException
+
+	{
+
 		int rows = 0;
 		for (AdminProfile obj : p) {
 			String sql = "insert into products(product_name,product_id,manufacturer,quantity,unit,price_rs,stock)values(?,?,?,?,?,?,?)";
@@ -45,6 +48,7 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 			throws DBException, SQLException {
 
 		UserProfileDao obj = new UserProfileDaoImpl();
+
 
 		int userId = obj.findUserId(user);
 		LocalDate today = LocalDate.now();
