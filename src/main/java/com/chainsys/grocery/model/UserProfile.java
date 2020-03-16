@@ -6,9 +6,6 @@ public class UserProfile {
 	private int productId;
 	private int noOfItems;
 
-	public UserProfile() {
-	}
-
 	public int getProductid() {
 		return productId;
 	}
