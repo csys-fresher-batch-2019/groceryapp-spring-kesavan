@@ -18,6 +18,4 @@ public class GroceryApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(GroceryApplication.class, args);
 	}
-	
-	
-}       
+}
