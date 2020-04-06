@@ -26,7 +26,10 @@ import com.chainsys.grocery.util.LoggerGrocery;
 public class UserProfileDaoImpl implements UserProfileDao {
 	LoggerGrocery LOGGER = LoggerGrocery.getInstance();
 
-	// CREATE ACCOUNT
+	/*
+	 * For Account Creation
+	 */
+
 	public int createAccount(String user, String pass, String address, long mobile, String mail) throws DBException {
 		int rows = 0;
 		String sql = "insert into usersdata(user_name,delivery_address,password,phone_no,mail_id) "
@@ -37,7 +40,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	// LOGIN
+	/*
+	 * Login
+	 */
+
 	public boolean login(String username, String pass) throws SQLException, DBException {
 		boolean res = false;
 		String sql = "select user_name,password from usersdata where user_name = ? and password =?";
@@ -57,7 +63,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	// VIEW PRODUCTS
+	/*
+	 * View Products
+	 */
+
 	public ArrayList<UserDisplay> viewProducts(String a) throws DBException {
 		ArrayList<UserDisplay> products = new ArrayList<UserDisplay>();
 		String sql = "select p.*,pr.review,pr.rating  from products p,proreview pr where p.product_id = pr.product_id "
@@ -87,9 +96,11 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return products;
 	}
 
-	// PLACE ORDER
-
+	/*
+	 * Place Order
+	 */
 	@SuppressWarnings("rawtypes")
+
 	public ArrayList<UserProfile> placeOrder(ArrayList selecteditems, String username, String paytype, int transId)
 			throws DBException, SQLException {
 
@@ -99,7 +110,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	// VIEW ORDERSUMMARY
+	/*
+	 * View OrderSummary
+	 */
+
 	public ArrayList<OrderSummary> viewOrder(int userid) throws DBException {
 		ArrayList<OrderSummary> productsview = new ArrayList<>();
 		LocalDate today = LocalDate.now();
@@ -135,18 +149,20 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return productsview;
 	}
 
-	/**
-	 * @param today
-	 * @throws DBException
-	 *             UPDATE ORDER STATUS IF AN ORDER DELIVERED
+	/*
+	 * Update Order Status If an Order is Delivered
 	 */
+
 	private void updateOrderStatusDelivered(LocalDate today) throws DBException {
 		String sql = "update orderdata set order_status = 'DELIVERED' where order_status != 'CANCELLED' and delivery_date <= ?";
 		Object[] params = { Date.valueOf(today) };
 		Jdbcpst.preparestmt(sql, params);
 	}
 
-	// CANCELORDER
+	/*
+	 * Cancel Order
+	 */
+
 	public String cancelOrder(int orderid) throws DBException {
 		String a = "";
 		String sql = "select product_id from orderdata where order_id= ? ";
@@ -176,25 +192,37 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return a;
 	}
 
-	// UPDATE PRODUCT STOCK
+	/*
+	 * Update Product Stock
+	 */
+
 	public void updateStatus() throws DBException {
 		Jdbcpst.preparestmt("update products set status='AVAILABLE' where stock > 0");
 		Jdbcpst.preparestmt(" update products set status='OUT OF STOCK',stock=0 where stock<=0");
 	}
 
-	// UPDATE ORDER STATUS FOR CANCELLED ORDER
+	/*
+	 * Update Order Status For Cancelled Order
+	 */
+
 	private void updateOrderStatus(int orderid) throws DBException {
 		Jdbcpst.preparestmt("update  orderdata set order_status='CANCELLED' where order_id= ?", orderid);
 	}
 
-	// UPDATE STOCK AFTER AN ORDER CANCELLED
+	/*
+	 * Update Product Stock For Cancelled Order
+	 */
+
 	private void updateStockaftercancel(int orderid, int pid) throws DBException {
 		Jdbcpst.preparestmt(
 				"update products p set p.stock=p.stock+ (select no_of_items from orderdata  where product_id = ? and order_id= ?) where p.product_id = ? ",
 				pid, orderid, pid);
 	}
 
-	// TRACKORDER
+	/*
+	 * Tracking an Order
+	 */
+
 	public String trackOrder(int orderid) throws DBException {
 		String s = "";
 		String sql = "select order_date from orderdata where order_id=?";
@@ -225,13 +253,19 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return s;
 	}
 
-	// CHANGE PASSWORD
-	public int changePassword(String mail, String pass) throws DBException {
+	/*
+	 * Update Password in Database
+	 */
+
+	public int updatePassword(String mail, String pass) throws DBException {
 		int rows = Jdbcpst.preparestmt("update usersdata set password = ? where mail_id=?", pass, mail);
 		return rows;
 	}
 
-	// CHANGE ADDRESS
+	/*
+	 * Change Address
+	 */
+
 	public void changeAddress(String username, String address) throws DBException {
 		try {
 			int id = findUserId(username);
@@ -242,7 +276,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		}
 	}
 
-	// DISPLAY USERID
+	/*
+	 * Find User Id
+	 */
+
 	public int findUserId(String user) throws DBException {
 		int userid = 0;
 		String sql = "select user_id from usersdata where user_name= ? ";
@@ -261,7 +298,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	}
 
-	// CHECK MAIL FOR ACC CREATION
+	/*
+	 * Check Mail Id For Account Creation To Eliminate Duplicate Accounts
+	 */
+
 	public boolean checkMailCreate(String mail) throws DBException {
 		boolean res = false;
 		String sql = "select mail_id from usersdata where mail_id=?";
@@ -269,7 +309,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return res;
 	}
 
-	// CHECK USERNAME FOR ACC CREATION
+	/*
+	 * Check UserName For Account Creation To Eliminate Duplicate Accounts
+	 */
+
 	public boolean checkUsernameCreate(String username) throws DBException {
 		boolean res = false;
 		String sql = "select user_name from usersdata where user_name=?";
@@ -277,7 +320,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return res;
 	}
 
-	// CHECK MOBILE NO FOR ACC CREATION
+	/*
+	 * Check Mobile Number For Account Creation To Eliminate Duplicate Accounts
+	 */
+
 	public boolean checkMobilenoCreate(long mobile) throws DBException {
 		boolean res = false;
 		String sql = "select phone_no from usersdata where phone_no=?";
@@ -285,7 +331,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return res;
 	}
 
-	// TRACK ORDER FOR CANCEL
+	/*
+	 * Check Cancel Eligibility
+	 */
+
 	public int findDaysForCancel(int orderid) throws DBException {
 		int days = 0;
 		String sql = "select order_date from orderdata where order_id= ? ";
@@ -307,7 +356,10 @@ public class UserProfileDaoImpl implements UserProfileDao {
 		return days;
 	}
 
-	// CHANGE PASSWORD / FORGOT PASSWORD
+	/*
+	 * User Validation for Change Password / Forgot Password
+	 */
+
 	public boolean userValidation(String mail, String user, String pass) throws DBException {
 		boolean res = false;
 		int rows = 0;
@@ -318,7 +370,7 @@ public class UserProfileDaoImpl implements UserProfileDao {
 				if (rs.next()) {
 					String mail1 = rs.getString("mail_id");
 					if (mail.equals(mail1)) {
-						rows = changePassword(mail, pass);
+						rows = updatePassword(mail, pass);
 					} else {
 						LOGGER.error(ErrorMessage.VERIFICATION_FAILED);
 					}

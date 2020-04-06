@@ -23,10 +23,11 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 	LoggerGrocery LOGGER = LoggerGrocery.getInstance();
 	UserProfileDao ob = new UserProfileDaoImpl();
 
-	public int addProducts(AdminProfile[] p) throws DBException
+	/*
+	 * Adding New Products
+	 */
 
-	{
-
+	public int addProducts(AdminProfile[] p) throws DBException {
 		int rows = 0;
 		for (AdminProfile obj : p) {
 			String sql = "insert into products(product_name,product_id,manufacturer,quantity,unit,price_rs,stock)values(?,?,?,?,?,?,?)";
@@ -40,15 +41,22 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 		return rows;
 	}
 
+	/*
+	 * Add Product Id for Review Purposes
+	 */
+
 	private void savepidreview(AdminProfile obj) throws DBException {
 		Jdbcpst.preparestmt("insert into proreview(product_id) values(" + obj.getProductId() + ")");
 	}
+
+	/*
+	 * Create An Order Based on Customer Preference
+	 */
 
 	public void createOrder(ArrayList<UserProfile> ob, String user, String type, int id)
 			throws DBException, SQLException {
 
 		UserProfileDao obj = new UserProfileDaoImpl();
-
 
 		int userId = obj.findUserId(user);
 		LocalDate today = LocalDate.now();
@@ -84,10 +92,18 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 		}
 	}
 
+	/*
+	 * Update Product Stock
+	 */
+
 	public void updateProducts(int value, int id) throws DBException {
 		Jdbcpst.preparestmt("update products set stock = stock+? where product_id=?", value, id);
 		ob.updateStatus();
 	}
+
+	/*
+	 * View Products
+	 */
 
 	public ArrayList<AdminProfile> viewProducts() throws DBException {
 		ArrayList<AdminProfile> view = new ArrayList<AdminProfile>();
@@ -117,6 +133,10 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 
 	}
 
+	/*
+	 * Create Bill Summary for User Specified Items
+	 */
+
 	public int bill(ArrayList<UserProfile> ob) throws DBException {
 		int amount = 0;
 		for (UserProfile obj1 : ob) {
@@ -139,8 +159,11 @@ public class AdminProfileDaoImpl implements AdminProfileDao {
 		return amount;
 	}
 
-	public int revenue(String a) throws DBException {
+	/*
+	 * Total Revenue of Shop
+	 */
 
+	public int revenue(String a) throws DBException {
 		int total = 0;
 		String type = " ";
 		if (a.isEmpty()) {

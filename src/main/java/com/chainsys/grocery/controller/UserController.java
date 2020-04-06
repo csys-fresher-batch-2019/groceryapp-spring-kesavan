@@ -42,7 +42,7 @@ public class UserController {
 	@PostMapping("/changepassword")
 	public int forgotpassword(@RequestParam("mailid") String mailid, @RequestParam("password") String password)
 			throws DBException {
-		return obj.changePassword(mailid, password);
+		return obj.updatePassword(mailid, password);
 	}
 
 	@GetMapping("/viewproducts")

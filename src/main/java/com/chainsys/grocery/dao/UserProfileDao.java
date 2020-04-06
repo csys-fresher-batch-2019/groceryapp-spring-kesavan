@@ -15,7 +15,7 @@ public interface UserProfileDao {
 
 	boolean login(String username, String password) throws DBException, SQLException;
 
-	int changePassword(String mailid, String password) throws DBException;
+	int updatePassword(String mailid, String password) throws DBException;
 
 	ArrayList<UserDisplay> viewProducts(String a) throws DBException;
 

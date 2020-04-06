@@ -39,7 +39,7 @@ public class UserService {
 
 	public void forgotpassword(String mailid, String password) throws ServiceException {
 		try {
-			obj.changePassword(mailid, password);
+			obj.updatePassword(mailid, password);
 		} catch (DBException e) {
 			e.printStackTrace();
 			throw new ServiceException(ErrorMessage.SERVICE, e);
